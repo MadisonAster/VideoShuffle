@@ -47,13 +47,12 @@
 		max = Math.max,
 
 		formats = [
-			'mp4',
-			'webm'
+			'mp4'
 		],
 		videoSources = [
-			'olympia',
-			'danceforme',
-			'koch'
+			'tiger',
+			'girl',
+			'vader'
 		],
 		videos = [],
 
@@ -378,7 +377,7 @@
 				button;
 
 			video.type = type;
-			video.src = 'video/' + source + '-' + size + '.' + format;
+			video.src = 'video/' + source + '.' + format;
 			video.crossOrigin = 'anonymous';
 			video.preload = 'auto';
 			video.id = 'video' + index;
@@ -400,6 +399,8 @@
 
 			button = document.createElement('span');
 			button.style.backgroundImage = 'url(images/' + source + '.jpg)';
+			button.style.backgroundSize = 'contain';
+			button.style.backgroundRepeat = 'no-repeat';
 			button.addEventListener('click', switchVideo.bind(null, index), false);
 			controls.appendChild(button);
 
