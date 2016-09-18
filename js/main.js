@@ -388,13 +388,7 @@
 			video.loop = true;
 			video.controls = true; //for debugging
 
-			/*
-			Start every video at a random time. They all have a similar bumper at the
-			beginning, so the transitions don't make for an effective demo if the videos
-			all look the same.
-			*/
 			video.addEventListener('loadedmetadata', function () {
-				video.currentTime = Math.random() * video.duration;
 				start();
 			}, false);
 			video.load();
