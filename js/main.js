@@ -46,7 +46,7 @@
 		abs = Math.abs,
 		max = Math.max,
 
-		formats = [
+		videoFormats = [
 			'mp4'
 		],
 		videoSources = [
@@ -55,6 +55,10 @@
 			'vader'
 		],
 		videos = [],
+		audioSources = [
+			'girl',
+		],
+		audios = [],
 
 		videoWidth = 1280,
 		videoHeight = 720,
@@ -358,10 +362,10 @@
 			}
 		}
 
-		for (i = 0; i < formats.length; i++) {
-			type = 'video/' + formats[i];
+		for (i = 0; i < videoFormats.length; i++) {
+			type = 'video/' + videoFormats[i];
 			if (vid.canPlayType && vid.canPlayType(type)) {
-				format = formats[i];
+				format = videoFormats[i];
 				break;
 			}
 		}
