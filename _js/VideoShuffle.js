@@ -46,6 +46,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
         this.bigbutton.className = this.playing ? 'playing' : 'paused';
     };
     this.play = function() {
+        this.PlayStart = Date.now();
         if (this.nextVideo) {
             this.nextVideo.play();
             this.playing = !this.nextVideo.paused;
@@ -54,6 +55,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
     };
     this.pause = function() {
         this.playing = false;
+        this.PausePoint = (Date.now()-this.PlayStart)+this.PausePoint;
         for (i = 0; i < this.videos.length; i++) {
             this.videos[i].element.pause();
         };
@@ -72,10 +74,13 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
             that.target.source = that.videos[index].reformat;
         };
         
-        that.PlayStart = Date.now();
         that.selectedIndex = index;
         that.nextVideo = that.videos[that.selectedIndex].element;
+        that.nextVideo.pause();
+        that.nextVideo.currentTime = 0;
+        that.PausePoint = 0;
         if (that.playing) {
+            that.PlayStart = Date.now();
             that.nextVideo.play();
         };
     };
@@ -89,9 +94,12 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
         duration = that.videos[that.selectedIndex].element.vduration;
         
         //console.log(that);
-        if (PlayDelta >= duration){
+        if (that.playing && PlayDelta >= duration-that.PausePoint){
             console.log(key+' video ended');
-            that.switchVideo(that, that.selectedIndex+1);
+            i = random(0, Object.keys(this.transitions).length-1);
+            transitionName = Object.keys(this.transitions)[i];
+            that.transitionClick(that, transitionName);
+            that.switchVideo(that, (that.selectedIndex+1) % that.videos.length);
         };
         var progress;
         if (that.transitionStart) {
@@ -180,6 +188,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
         // start - attach the effect nodes to the video sources being transitioned
         // draw - runs every frame of the transition
         whip: {
+            name: 'whip',
             title: 'Whip Pan',
             duration: 250,
             transformFrom: null,
@@ -215,6 +224,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
             }
         },
         flash: {
+            name: 'flash',
             title: 'Flash',
             duration: 500,
             linear: null,
@@ -248,6 +258,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
             }
         },
         channel: {
+            name: 'channel',
             title: 'Channel Change',
             duration: 300,
             volume: false,
