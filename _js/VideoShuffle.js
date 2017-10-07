@@ -443,14 +443,20 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             that.play();
         };
     };
-    this.canvas.addEventListener('click', this.togglePlay.bind(null, this), false);
-    this.bigbutton.addEventListener('click', this.togglePlay.bind(null, this), false);
-    window.addEventListener('keyup', function(evt) {
-        //User can press the space bar to toggle pause/play
+    this.spacebar = function(evt) {
         if (evt.which === 32) {
             this.togglePlay(this);
-        }
-    }, true);
+        };
+    };
+    this.canvas.addEventListener('click', this.togglePlay.bind(null, this), false);
+    this.bigbutton.addEventListener('click', this.togglePlay.bind(null, this), false);
+    window.addEventListener('keyup', this.spacebar.bind(this));
+    //window.addEventListener('keyup', function(evt) {
+        //User can press the space bar to toggle pause/play
+    //    if (evt.which === 32) {
+    //        this.togglePlay(this);
+    //    }
+    //}, true);
     ///////////////////////////////////////////////////////
     
     
