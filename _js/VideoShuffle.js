@@ -84,6 +84,12 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
             that.nextVideo.play();
         };
     };
+    this.switchAudio = function(that, index) {
+        this.audios[index].button.className = 'active';
+        
+        that.transitions[that.activeAudio].button.className = '';
+        
+    };
     this.draw = function(that) {
         //Runs repeatedly as long as the web page is visible, approximately every 16 milliseconds.
         //Only does work while the transition is running, handles timing of the animation
@@ -147,7 +153,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
     this.loadVideos = function() {
         for (i = 0; i < this.videoSources.length; i++) {
             var video = document.createElement('video');
-            var button = document.createElement('span');;
+            var button = document.createElement('span');
             
             video.key = this.videoSources[i];
             video.index = this.videoSources[i];
@@ -158,6 +164,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
             video.preload = 'auto';
             video.id = 'video' + i;
             video.loop = false;
+            video.muted = true;
             video.controls = true; //for debugging
             video.addEventListener('loadedmetadata', this.loadedmeta.bind(null, this), false);
             video.style.display = 'none';
@@ -174,6 +181,27 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
                 element: video,
                 button: button,
                 reformat: null
+            });
+        };
+    };
+    this.loadAudios = function() {
+        this.audioVolume = 1.0;
+        for (i = 0; i < this.audioSources.length; i++) {
+            var audio = document.createElement('audio');
+            var button = document.createElement('span');
+            
+            audio.volume = this.audioVolume;
+            audio.src = 'audio/'+this.videoSources[i]+'.mp3';
+            audio.load();
+            document.body.appendChild(audio);
+            
+            button.addEventListener('click', this.switchAudio.bind(null, this, i), false);
+            button.innerHTML = this.videoSources[i];
+            this.controls.appendChild(button);
+            
+            this.audios.push({
+                element: audio,
+                button: button,
             });
         };
     };
@@ -310,6 +338,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
     };
     this.transition = this.transitions[this.activeTransition];
     this.loadVideos();
+    this.loadAudios();
     ///////////////////////////////////////////////////////
     
     
@@ -473,7 +502,9 @@ vSources = [
     'danceforme',
 ];
 aSources = [
+    'tiger',
     'girl',
+    'vader',
 ];
 var ss = ShufflePlayer(vSources, aSources, vSourceDurations);
 
