@@ -1,7 +1,8 @@
-function ShufflePlayer(vSources, aSources, vSourceDurations){
+function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.videoSources = vSources;
     this.vSourceDurations = vSourceDurations;
     this.audioSources = aSources;
+    this.aSourceDurations = aSourceDurations;
     this.videos = [];
     this.audios = [];
 
@@ -46,87 +47,122 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
         this.bigbutton.className = this.playing ? 'playing' : 'paused';
     };
     this.play = function() {
-        this.PlayStart = Date.now();
+        this.VideoStartTime = Date.now();
+        this.AudioStartTime = Date.now();
         if (this.nextVideo) {
             this.nextVideo.play();
             this.playing = !this.nextVideo.paused;
+        };
+        if (this.nextAudio) {
+            this.nextAudio.play();
         };
         this.updateButtonState();
     };
     this.pause = function() {
         this.playing = false;
-        this.PausePoint = (Date.now()-this.PlayStart)+this.PausePoint;
+        this.VideoPausePoint = (Date.now()-this.VideoStartTime)+this.VideoPausePoint;
+        this.AudioPausePoint = (Date.now()-this.AudioStartTime)+this.AudioPausePoint;
         for (i = 0; i < this.videos.length; i++) {
             this.videos[i].element.pause();
+        };
+        for (i = 0; i < this.audios.length; i++) {
+            this.audios[i].element.pause();
         };
         this.updateButtonState();
     };
     this.switchVideo = function(that, index) {
-        if (!that.seriously || that.selectedIndex === index || index >= that.videos.length) {
+        if (!that.seriously || that.ActiveVideoIndex === index || index >= that.videos.length) {
             //no change, nothing to do here
             return;
         };
-        if (that.selectedIndex >= 0) {
+        if (that.ActiveVideoIndex >= 0) {
             that.transitionStart = Date.now();
-            that.previousVideo = that.videos[that.selectedIndex].element;
-            that.target.source = that.transition.start(that, that.videos[that.selectedIndex].reformat, that.videos[index].reformat);
+            that.previousVideo = that.videos[that.ActiveVideoIndex].element;
+            that.target.source = that.transition.start(that, that.videos[that.ActiveVideoIndex].reformat, that.videos[index].reformat);
         } else {
             that.target.source = that.videos[index].reformat;
         };
         
-        that.selectedIndex = index;
-        that.nextVideo = that.videos[that.selectedIndex].element;
+        that.ActiveVideoIndex = index;
+        that.nextVideo = that.videos[that.ActiveVideoIndex].element;
         that.nextVideo.pause();
         that.nextVideo.currentTime = 0;
-        that.PausePoint = 0;
+        that.VideoPausePoint = 0;
         if (that.playing) {
-            that.PlayStart = Date.now();
+            that.VideoStartTime = Date.now();
             that.nextVideo.play();
         };
     };
     this.switchAudio = function(that, index) {
-        this.audios[index].button.className = 'active';
+        if (!that.seriously || that.ActiveAudioIndex === index || index >= that.audios.length) {
+            return;
+        };
+        if (that.ActiveAudioIndex >= 0) {
+            //console.log(that.ActiveAudioIndex);
+            //console.log(that.audios[that.ActiveAudioIndex]);
+            that.audios[that.ActiveAudioIndex].button.className = '';
+            
+            that.previousAudio = that.audios[that.ActiveAudioIndex].element;
+            that.previousAudio.pause();
+        };
+        that.audios[index].button.className = 'active';
         
-        that.transitions[that.activeAudio].button.className = '';
+        
+        
+        that.ActiveAudioIndex = index;
+        that.nextAudio = that.audios[that.ActiveAudioIndex].element;
+        that.nextAudio.pause();
+        that.nextAudio.currentTime = 0;
+        that.AudioPausePoint = 0;
+        if (that.playing) {
+            that.AudioStartTime = Date.now();
+            that.nextAudio.play();
+        };
         
     };
     this.draw = function(that) {
         //Runs repeatedly as long as the web page is visible, approximately every 16 milliseconds.
         //Only does work while the transition is running, handles timing of the animation
         //and volume cross-fade.
-        PlayDelta = Date.now()-that.PlayStart;
-        key = that.videos[that.selectedIndex].element.key;
-        //index = that.videos[that.selectedIndex].element.index;
-        duration = that.videos[that.selectedIndex].element.vduration;
+        PlayVideoDelta = Date.now()-that.VideoStartTime;
+        VideoKey = that.videos[that.ActiveVideoIndex].element.key;
+        VideoDuration = that.videos[that.ActiveVideoIndex].element.vduration;
         
-        //console.log(that);
-        if (that.playing && PlayDelta >= duration-that.PausePoint){
-            console.log(key+' video ended');
+        PlayAudioDelta = Date.now()-that.AudioStartTime;
+        AudioKey = that.audios[that.ActiveAudioIndex].element.key;
+        AudioDuration = that.audios[that.ActiveAudioIndex].element.aduration;
+        
+        if (that.playing && PlayVideoDelta >= VideoDuration-that.VideoPausePoint){
+            console.log(VideoKey+' video ended');
             i = random(0, Object.keys(this.transitions).length-1);
             transitionName = Object.keys(this.transitions)[i];
             that.transitionClick(that, transitionName);
-            that.switchVideo(that, (that.selectedIndex+1) % that.videos.length);
+            that.switchVideo(that, (that.ActiveVideoIndex+1) % that.videos.length);
         };
-        var progress;
+        if (that.playing && PlayAudioDelta >= AudioDuration-that.AudioPausePoint){
+            console.log(AudioKey+' audio ended');
+            that.switchAudio(that, (that.ActiveAudioIndex+1) % that.audios.length);
+        };
+        //var TransitionProgress;
         if (that.transitionStart) {
-            progress = Math.max(Date.now() - that.transitionStart, 0) / that.transition.duration;
-                if (progress >= 1) {
+            TransitionProgress = Math.max(Date.now() - that.transitionStart, 0) / that.transition.VideoDuration;
+                if (TransitionProgress >= 1) {
                 that.transitionStart = 0;
-                that.target.source = that.videos[that.selectedIndex].reformat;
+                that.target.source = that.videos[that.ActiveVideoIndex].reformat;
                 if (that.previousVideo) {
                     that.previousVideo.pause();
                 };
             } else {
                 if (that.transition.volume !== false) {
                     if (that.previousVideo) {
-                        that.previousVideo.volume = Math.min(1, Math.max(0, 1 - progress));
+                        that.previousVideo.volume = Math.min(1, Math.max(0, 1 - TransitionProgress));
                     };
-                    that.nextVideo.volume = Math.min(1, Math.max(0, progress));
+                    that.nextVideo.volume = Math.min(1, Math.max(0, TransitionProgress));
                 } else {
                     that.previousVideo.volume = 0;
                     that.nextVideo.volume = 1;
                 };
-                    that.transition.draw(that, progress);
+                    that.transition.draw(that, TransitionProgress);
             };
         };
     };
@@ -145,6 +181,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
         this.resize();
         this.seriously.go(this.draw.bind(null, this));
         this.switchVideo(this, 0);
+        this.switchAudio(this, 0);
         this.play();
     };
     this.loadedmeta = function(that) {
@@ -191,12 +228,13 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
             var button = document.createElement('span');
             
             audio.volume = this.audioVolume;
-            audio.src = 'audio/'+this.videoSources[i]+'.mp3';
+            audio.aduration = this.aSourceDurations[this.audioSources[i]];
+            audio.src = 'audio/'+this.audioSources[i]+'.mp3';
             audio.load();
             document.body.appendChild(audio);
             
             button.addEventListener('click', this.switchAudio.bind(null, this, i), false);
-            button.innerHTML = this.videoSources[i];
+            button.innerHTML = this.audioSources[i];
             this.controls.appendChild(button);
             
             this.audios.push({
@@ -440,9 +478,9 @@ function ShufflePlayer(vSources, aSources, vSourceDurations){
         //Pause the video when this browser tab is in the background or minimized.
         //Resume when it comes back in focus, but only if the user didn't pause manually.
         if (document.hidden || document.mozHidden || document.msHidden || document.webkitHidden) {
-            that.videos[that.selectedIndex].element.pause();
+            that.videos[that.ActiveVideoIndex].element.pause();
         } else if (that.playing) {
-            that.videos[that.selectedIndex].element.play();
+            that.videos[that.ActiveVideoIndex].element.play();
         };
     };
     document.addEventListener('visibilitychange', this.visibilityChange.bind(null, this), false);
@@ -485,12 +523,23 @@ vSourceTimeStrings = {
     'olympia' : '00:01:38.40',
     'danceforme' : '00:01:55.62',
 };
+aSourceTimeStrings = {
+    'tiger': '00:02:24.09',
+    'girl' : '00:03:04.71',
+    'vader' : '00:04:15.29',
+};
 
 vSourceDurations = {};
+aSourceDurations = {};
 for (i = 0; i < Object.keys(vSourceTimeStrings).length; i++) {
     t = vSourceTimeStrings[Object.keys(vSourceTimeStrings)[i]];
     milliseconds = ParseSeconds(t);
     vSourceDurations[Object.keys(vSourceTimeStrings)[i]] = milliseconds;
+};
+for (i = 0; i < Object.keys(aSourceTimeStrings).length; i++) {
+    t = aSourceTimeStrings[Object.keys(aSourceTimeStrings)[i]];
+    milliseconds = ParseSeconds(t);
+    aSourceDurations[Object.keys(aSourceTimeStrings)[i]] = milliseconds;
 };
 
 vSources = [
@@ -506,7 +555,7 @@ aSources = [
     'girl',
     'vader',
 ];
-var ss = ShufflePlayer(vSources, aSources, vSourceDurations);
+var ss = ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations);
 
 
 
