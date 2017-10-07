@@ -6,4 +6,4 @@ This is an automatic video clip player that plays through videos provided to it 
 
 ## Transitions
 
-The starting point for this code, and the video transition behavior is all from the code this library is originally forked from found [here](https://github.com/povdocs/video-transitions)
+The starting point for this code, and the video transition behavior is all from the code this library is originally forked from [here](https://github.com/povdocs/video-transitions)
