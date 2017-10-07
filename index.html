@@ -5,187 +5,7 @@
 		<meta charset="utf-8"/>
 		<meta http-equiv="X-UA-Compatible" content="IE-edge"/>
 		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1, width=device-width"/>
-		<style>
-			body {
-				font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-				color: #eee;
-				overflow: hidden;
-				background: rgb(40, 40, 40);
-
-				height: 100%;
-				width: 100%;
-				margin: 0px;
-				padding: 0px;
-
-				/* for all svg icons */
-				fill: rgba(200, 200, 200, 0.5);
-			}
-
-			#video-container.mid {
-				width: 960px;
-				height: 540px;
-			}
-
-			#video-container > * {
-				z-index: 300;
-			}
-
-			video {
-				display: none;
-				/*
-				position: absolute;
-				width: 30%;
-				bottom: 0;
-				left: 0;
-				*/
-			}
-
-			#canvas {
-				background-color: #D1D1D1;
-				box-shadow: 0px 0px 15px rgb(0, 0, 0);
-
-				position: absolute;
-				top: 0px;
-				right: 0px;
-				bottom: 0px;
-				left: 0px;
-				margin: auto;
-				cursor: pointer;
-			}
-
-			#bigbutton {
-				position: absolute;
-				left: 50%;
-				top: 50%;
-				margin: -200px 0 0 -150px;
-				width: 100px;
-				height: 100px;
-				cursor: pointer;
-				padding: 100px;
-			}
-
-			#bigbutton > svg {
-				display: none;
-				width: 100%;
-				height: 100%;
-			}
-
-			#bigbutton.playing:hover > #pause,
-			#bigbutton.paused > #play {
-				display: inline;
-			}
-
-			input[type=range] {
-				width: 400px;
-			}
-
-			#controls {
-				background-color: #373636;
-				padding: 12px;
-				position: absolute;
-				bottom: 0;
-				left: 50%;
-				width: 800px;
-				margin-left: -400px;
-				box-shadow: 0px 0px 15px rgb(0, 0, 0);
-				-webkit-transform-origin: bottom center;
-				-moz-transform-origin: bottom center;
-				transform-origin: bottom center;
-			}
-
-			@media (max-width: 800px) {
-				#controls {
-					-webkit-transform: scale(0.5);
-					-moz-transform: scale(0.5);
-					transform: scale(0.5);
-				}
-			}
-
-			@media (max-width: 400px) {
-				#controls {
-					-webkit-transform: scale(0.4);
-					-moz-transform: scale(0.4);
-					transform: scale(0.4);
-				}
-			}
-
-			#controls > div {
-				display: inline;
-			}
-
-			#controls span {
-				margin: 0 6px;
-				width: 115px;
-				height: 95px;
-				display: inline-block;
-				cursor: pointer;
-				opacity: 0.6;
-				background-position: center;
-				background-color: rgba(0, 0, 0, 0.3);
-
-				text-align: center;
-				vertical-align: middle;
-				padding-top: 30px;
-				box-sizing: border-box;
-			}
-
-			#controls span.active {
-				color: #fff;
-				background-color: black;
-			}
-
-			#controls > span:hover {
-				opacity: 1;
-			}
-
-			#info {
-				z-index: 100;
-				position: absolute;
-				left: 10px;
-				top: 10px;
-
-				border-radius: 5px;
-				box-sizing: border-box;
-			}
-
-			#info.open {
-				background-color: rgba(20, 20, 20, 0.5);
-			}
-
-			#info > article {
-				display: none;
-
-				margin: 0 0 0 40px;
-				padding: 10px;
-				width: 350px;
-
-				font-size: 14px;
-				text-shadow: 0 1px 0 rgba( 255,255,255,.2 ), 0 -1px 0 rgba( 0,0,0,.2 );
-			}
-
-			#info > article a,
-			#info > article a:visited {
-				color: #eee;
-			}
-
-			#info.open > article {
-				display: block;
-			}
-
-			#infobutton {
-				width: 20px;
-				height: 20px;
-				margin: 10px;
-				float: left;
-				cursor: pointer;
-			}
-
-			h1 {
-				font-size: 16px;
-				margin: 0 0 4px;
-			}
-
-		</style>
+		<link rel="stylesheet" type="text/css" href="./_css/VideoShuffle.css">
 	</head>
 	<body>
 		<canvas id="canvas" width="1280" height="720"></canvas>
@@ -253,14 +73,14 @@
 			</article>
 		</div>
 
-		<script type="text/javascript" src="js/lib/Seriously.js/seriously.js"></script>
-		<script type="text/javascript" src="js/lib/Seriously.js/effects/seriously.directionblur.js"></script>
-		<script type="text/javascript" src="js/lib/Seriously.js/effects/seriously.blend.js"></script>
-		<script type="text/javascript" src="js/lib/Seriously.js/effects/seriously.tvglitch.js"></script>
-		<script type="text/javascript" src="js/lib/Seriously.js/effects/seriously.linear-transfer.js"></script>
-		<script type="text/javascript" src="js/lib/Seriously.js/effects/seriously.blur.js"></script>
-		<script type="text/javascript" src="js/lib/Seriously.js/effects/seriously.exposure.js"></script>
+		<script type="text/javascript" src="./_js/Seriously.js/seriously.js"></script>
+		<script type="text/javascript" src="./_js/Seriously.js/effects/seriously.directionblur.js"></script>
+		<script type="text/javascript" src="./_js/Seriously.js/effects/seriously.blend.js"></script>
+		<script type="text/javascript" src="./_js/Seriously.js/effects/seriously.tvglitch.js"></script>
+		<script type="text/javascript" src="./_js/Seriously.js/effects/seriously.linear-transfer.js"></script>
+		<script type="text/javascript" src="./_js/Seriously.js/effects/seriously.blur.js"></script>
+		<script type="text/javascript" src="./_js/Seriously.js/effects/seriously.exposure.js"></script>
 
-		<script type="text/javascript" src="js/main.js"></script>
+		<script type="text/javascript" src="./_js/VideoShuffle.js"></script>
 	</body>
 </html>
