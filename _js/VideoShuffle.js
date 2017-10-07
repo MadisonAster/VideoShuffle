@@ -8,9 +8,9 @@ function ShufflePlayer(vSources, aSources){
     this.videoHeight = 720;
     this.activeTransition = 'flash';
     
-    this.canvas = document.getElementById('canvas');
-    this.controls = document.getElementById('controls');
-    this.bigbutton = document.getElementById('bigbutton');
+    this.canvas = document.getElementById('VideoShuffleCanvas');
+    this.controls = document.getElementById('VideoShuffleControls');
+    this.bigbutton = document.getElementById('VideoShuffleBigButton');
     
     ///////////////////////////////////////////////////////
     //Resize Behavior
@@ -137,6 +137,7 @@ function ShufflePlayer(vSources, aSources){
             video.loop = true;
             video.controls = true; //for debugging
             video.addEventListener('loadedmetadata', this.loadedmeta.bind(null, this), false);
+            video.style.display = 'none';
             video.load();
             document.body.appendChild(video);
             
@@ -405,8 +406,8 @@ function ShufflePlayer(vSources, aSources){
             that.info.className = 'open';
         };
     };
-    this.infobutton = document.getElementById('infobutton');
-    this.info = document.getElementById('info');
+    this.infobutton = document.getElementById('VideoShuffleInfoButton');
+    this.info = document.getElementById('VideoShuffleInfo');
     this.infobutton.addEventListener('click', this.infoClick.bind(null, this), false);
     ///////////////////////////////////////////////////////
 };
