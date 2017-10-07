@@ -1,5 +1,6 @@
-function ShufflePlayer(vSources, aSources){
+function ShufflePlayer(vSources, aSources, vSourceDurations){
     this.videoSources = vSources;
+    this.vSourceDurations = vSourceDurations;
     this.audioSources = aSources;
     this.videos = [];
     this.audios = [];
@@ -71,6 +72,7 @@ function ShufflePlayer(vSources, aSources){
             that.target.source = that.videos[index].reformat;
         };
         
+        that.PlayStart = Date.now();
         that.selectedIndex = index;
         that.nextVideo = that.videos[that.selectedIndex].element;
         if (that.playing) {
@@ -81,6 +83,16 @@ function ShufflePlayer(vSources, aSources){
         //Runs repeatedly as long as the web page is visible, approximately every 16 milliseconds.
         //Only does work while the transition is running, handles timing of the animation
         //and volume cross-fade.
+        PlayDelta = Date.now()-that.PlayStart;
+        key = that.videos[that.selectedIndex].element.key;
+        //index = that.videos[that.selectedIndex].element.index;
+        duration = that.videos[that.selectedIndex].element.vduration;
+        
+        //console.log(that);
+        if (PlayDelta >= duration){
+            console.log(key+' video ended');
+            that.switchVideo(that, that.selectedIndex+1);
+        };
         var progress;
         if (that.transitionStart) {
             progress = Math.max(Date.now() - that.transitionStart, 0) / that.transition.duration;
@@ -129,12 +141,15 @@ function ShufflePlayer(vSources, aSources){
             var video = document.createElement('video');
             var button = document.createElement('span');;
             
+            video.key = this.videoSources[i];
+            video.index = this.videoSources[i];
+            video.vduration = this.vSourceDurations[this.videoSources[i]];
             video.type = 'video/mp4';
             video.src = 'video/'+this.videoSources[i]+'.mp4';
             video.crossOrigin = 'anonymous';
             video.preload = 'auto';
             video.id = 'video' + i;
-            video.loop = true;
+            video.loop = false;
             video.controls = true; //for debugging
             video.addEventListener('loadedmetadata', this.loadedmeta.bind(null, this), false);
             video.style.display = 'none';
@@ -410,6 +425,32 @@ function ShufflePlayer(vSources, aSources){
     this.info = document.getElementById('VideoShuffleInfo');
     this.infobutton.addEventListener('click', this.infoClick.bind(null, this), false);
     ///////////////////////////////////////////////////////
+    
+    console.log(this);
+};
+
+function ParseSeconds(timestring){
+    milliseconds = parseInt(timestring.rsplit('.',1)[1])*10;
+    seconds = parseInt(timestring.rsplit('.',1)[0].rsplit(':',1)[1])*1000;
+    minutes = parseInt(timestring.split(':')[1])*60*1000;
+    hours = parseInt(timestring.split(':',1)[0])*60*60*1000;
+    return hours+minutes+seconds+milliseconds;
+};
+
+vSourceTimeStrings = {
+    'tiger': '00:00:08.04',
+    'girl' : '00:00:20.08',
+    'vader' : '00:00:20.00',
+    'koch' : '00:02:29.62',
+    'olympia' : '00:01:38.40',
+    'danceforme' : '00:01:55.62',
+};
+
+vSourceDurations = {};
+for (i = 0; i < Object.keys(vSourceTimeStrings).length; i++) {
+    t = vSourceTimeStrings[Object.keys(vSourceTimeStrings)[i]];
+    milliseconds = ParseSeconds(t);
+    vSourceDurations[Object.keys(vSourceTimeStrings)[i]] = milliseconds;
 };
 
 vSources = [
@@ -423,7 +464,7 @@ vSources = [
 aSources = [
     'girl',
 ];
-var ss = ShufflePlayer(vSources, aSources);
+var ss = ShufflePlayer(vSources, aSources, vSourceDurations);
 
 
 
