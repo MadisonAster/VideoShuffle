@@ -1,15 +1,17 @@
-#VideoShuffleCanvas {
-    background-color: #D1D1D1;
-    box-shadow: 0px 0px 15px rgb(0, 0, 0);
-
+#VideoShuffleWrapper {
     position: absolute;
-    top: 0px;
-    right: 0px;
-    bottom: 0px;
-    left: 0px;
-    margin: auto;
-    cursor: pointer;
+    width: 100%;
+    height: auto;
+    margin: 0px;
+    padding: 0px;
+    top: 50%;
+    transform: translate(0%, -50%);
 }
+#VideoShuffleCanvas {
+    margin: 0px;
+    padding: 0px;
+}
+
 #VideoShuffleBigButton {
     position: absolute;
     left: 50%;
