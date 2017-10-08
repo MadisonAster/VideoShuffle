@@ -503,6 +503,20 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.infobutton.addEventListener('click', this.infoClick.bind(null, this), false);
     ///////////////////////////////////////////////////////
     
+    ///////////////////////////////////////////////////////
+    //MusicButton
+    this.musicClick = function(that) {
+        if (that.music.className) {
+            that.music.className = '';
+        } else {
+            that.music.className = 'open';
+        };
+    };
+    this.musicbutton = document.getElementById('VideoShuffleMusicButton');
+    this.music = document.getElementById('VideoShuffleMusic');
+    this.musicbutton.addEventListener('click', this.musicClick.bind(null, this), false);
+    ///////////////////////////////////////////////////////
+    
     console.log(this);
 };
 
