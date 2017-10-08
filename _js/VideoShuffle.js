@@ -410,8 +410,8 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             height = width * 9 / 16;
         };
 
-        this.canvas.style.width = width + 'px';
-        this.canvas.style.height = height + 'px';
+        //this.canvas.style.width = width + 'px';
+        //this.canvas.style.height = height + 'px';
 
         // If it's a big enough screen and we have a retina display, let's take advantage.
         // We assume that the GPU will be able to handle it
