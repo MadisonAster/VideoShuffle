@@ -143,9 +143,8 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             console.log(AudioKey+' audio ended');
             that.switchAudio(that, (that.ActiveAudioIndex+1) % that.audios.length);
         };
-        //var TransitionProgress;
         if (that.transitionStart) {
-            TransitionProgress = Math.max(Date.now() - that.transitionStart, 0) / that.transition.VideoDuration;
+            TransitionProgress = Math.max(Date.now() - that.transitionStart, 0) / that.transition.duration;
                 if (TransitionProgress >= 1) {
                 that.transitionStart = 0;
                 that.target.source = that.videos[that.ActiveVideoIndex].reformat;
@@ -451,12 +450,6 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.canvas.addEventListener('click', this.togglePlay.bind(null, this), false);
     this.bigbutton.addEventListener('click', this.togglePlay.bind(null, this), false);
     window.addEventListener('keyup', this.spacebar.bind(this));
-    //window.addEventListener('keyup', function(evt) {
-        //User can press the space bar to toggle pause/play
-    //    if (evt.which === 32) {
-    //        this.togglePlay(this);
-    //    }
-    //}, true);
     ///////////////////////////////////////////////////////
     
     
