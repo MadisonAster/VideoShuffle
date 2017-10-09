@@ -437,7 +437,6 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             this.videos[i].reformat.height = height;
         };
     }, 30, true);
-    document.getElementById(this.activeTransition).className = 'active';
     window.addEventListener('orientationchange', this.resize);
     window.addEventListener('resize', this.resize);
     ///////////////////////////////////////////////////////
@@ -466,17 +465,8 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     ///////////////////////////////////////////////////////
     //Transition Buttons
     this.transitionClick = function(that, transitionName) {
-        that.transitions[that.activeTransition].button.className = '';
         that.activeTransition = transitionName;
         that.transition = that.transitions[that.activeTransition];
-        that.transitions[transitionName].button.className = 'active';
-    };
-    for (i = 0; i < Object.keys(this.transitions).length; i++) {
-        t = Object.keys(this.transitions)[i];
-        
-        var button = document.getElementById(t);
-        this.transitions[t].button = button;
-        button.addEventListener('click', this.transitionClick.bind(null, this, t), false);
     };
     ///////////////////////////////////////////////////////
     
