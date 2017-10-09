@@ -66,47 +66,8 @@
     width: auto;
 }
 
-#VideoShuffleBigButton {
-    margin: 0px;
-    height: 100%;
-    width: auto;
-    padding-left: 10px;
-    display: inline-block;
-    cursor: pointer;
-    opacity: 0.6;
-    background-position: center;
 
-    text-align: center;
-    vertical-align: middle;
-    box-sizing: border-box;
-    
-}
-#VideoShuffleBigButton > svg {
-    fill: rgba(200, 200, 200, 0.5);
-    display: none;
-    height: 100%;
-    width: auto;
-}
-#VideoShuffleBigButton.playing > #pause,
-#VideoShuffleBigButton.paused > #play {
-    display: inline;
-}
 
-#VideoShuffleControls {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #eee;
-    background-color: #373636;
-    padding: 0px;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
-    height: 10%;
-    box-shadow: 0px 0px 15px rgb(0, 0, 0);
-    -webkit-transform-origin: bottom left;
-    -moz-transform-origin: bottom left;
-    transform-origin: bottom left;
-}
 /*
 @media (max-width: 800px) {
     #VideoShuffleControls {
@@ -136,42 +97,105 @@
 
     border-radius: 5px;
     box-sizing: border-box;
-}
-
-#VideoShuffleMusic.open {
-    background-color: rgba(20, 20, 20, 0.5);
-}
-#VideoShuffleMusic > article {
     display: none;
+    
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #eee;
-
+    
     margin: 0 0 0 40px;
     padding: 10px;
     width: 350px;
-
     font-size: 14px;
     text-shadow: 0 1px 0 rgba( 255,255,255,.2 ), 0 -1px 0 rgba( 0,0,0,.2 );
+
 }
-#VideoShuffleMusic > article a,
-#VideoShuffleMusic > article a:visited {
-    color: #eee;
-}
-#VideoShuffleMusic.open > article {
+#VideoShuffleMusic.open {
+    background-color: rgba(20, 20, 20, 0.8);
     display: block;
 }
+#VideoShuffleMusic span {
+    margin: 0 6px;
+    width: 100%;
+    height: 100%;
+    display: block;
+    cursor: pointer;
+    opacity: 0.6;
+    background-position: center;
+    background-color: rgba(0, 0, 0, 0.3);
+
+    text-align: left;
+    vertical-align: middle;
+    padding: 15px;
+    box-sizing: border-box;
+}
+#VideoShuffleMusic span.active {
+    color: #fff;
+    background-color: black;
+}
+#VideoShuffleMusic > span:hover {
+    opacity: 1;
+}
 
 
-
-
-
-
-
-
-#VideoShuffleControls > div {
+#VideoShuffleBigButton > svg {
+    fill: rgba(200, 200, 200, 0.5);
+    display: none;
+    height: 100%;
+    width: auto;
+}
+#VideoShuffleBigButton.playing > #pause,
+#VideoShuffleBigButton.paused > #play {
     display: inline;
 }
-#VideoShuffleControls span {
+
+
+#VideoShuffleControls {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    color: #eee;
+    background-color: rgba(54,54,54,.85);
+    padding: 0px;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 10%;
+    box-shadow: 0px 0px 15px rgb(0, 0, 0);
+    -webkit-transform-origin: bottom left;
+    -moz-transform-origin: bottom left;
+    transform-origin: bottom left;
+}
+#VideoShuffleThumbnails,
+#VideoShuffleBigButton {
+    margin: 0px;
+    height: 100%;
+    width: auto;
+    display: inline-block;
+    cursor: pointer;
+    opacity: 0.6;
+    background-position: center;
+
+    text-align: center;
+    vertical-align: middle;
+    box-sizing: border-box;
+}
+#VideoShuffleThumbnails {
+    overflow: hidden;
+}
+#VideoShuffleBigButton {
+    padding-left: 10px;
+}
+#VideoShuffleFullscreenButton {
+    position: absolute;
+    right: 0px;
+    top: 0px;
+    padding : 10px;
+}
+#VideoShuffleControls > div,
+#VideoShuffleThumbnails > div {
+    display: inline;
+}
+#VideoShuffleControls span,
+#VideoShuffleThumbnails span {
     margin: 0 6px;
     width: 50px;
     height: 100%;
@@ -186,11 +210,13 @@
     padding-top: 30px;
     box-sizing: border-box;
 }
-#VideoShuffleControls span.active {
+#VideoShuffleControls span.active,
+#VideoShuffleThumbnails span.active {
     color: #fff;
     background-color: black;
 }
-#VideoShuffleControls > span:hover {
+#VideoShuffleControls > span:hover,
+#VideoShuffleThumbnails > span:hover {
     opacity: 1;
 }
 

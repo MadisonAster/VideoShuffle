@@ -12,6 +12,8 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     
     this.canvas = document.getElementById('VideoShuffleCanvas');
     this.controls = document.getElementById('VideoShuffleControls');
+    this.thumbs = document.getElementById('VideoShuffleThumbnails');
+    this.MusicMenu = document.getElementById('VideoShuffleMusic');
     this.bigbutton = document.getElementById('VideoShuffleBigButton');
     
     ///////////////////////////////////////////////////////
@@ -211,7 +213,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             button.style.backgroundSize = 'contain';
             button.style.backgroundRepeat = 'no-repeat';
             button.addEventListener('click', this.switchVideo.bind(null, this, i), false);
-            this.controls.appendChild(button);
+            this.thumbs.appendChild(button);
             
             this.videos.push({
                 element: video,
@@ -234,7 +236,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             
             button.addEventListener('click', this.switchAudio.bind(null, this, i), false);
             button.innerHTML = this.audioSources[i];
-            this.controls.appendChild(button);
+            this.MusicMenu.appendChild(button);
             
             this.audios.push({
                 element: audio,
