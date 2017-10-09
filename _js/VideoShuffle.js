@@ -46,7 +46,15 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         };
     };
     this.updateButtonState = function() {
-        this.bigbutton.className = this.playing ? 'playing' : 'paused';
+        if(this.playing){
+            this.bigbutton.classList.add('playing');
+            this.bigbutton.classList.remove('paused');
+        } else {
+            this.bigbutton.classList.add('paused');
+            this.bigbutton.classList.remove('playing');
+        }
+            
+        //this.bigbutton.className = this.playing ? 'playing' : 'paused';
     };
     this.play = function() {
         this.VideoStartTime = Date.now();
@@ -210,7 +218,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             document.body.appendChild(video);
             
             button.style.backgroundImage = 'url(images/'+this.videoSources[i]+'.jpg)';
-            button.style.backgroundSize = 'contain';
+            button.style.backgroundSize = 'cover';
             button.style.backgroundRepeat = 'no-repeat';
             button.addEventListener('click', this.switchVideo.bind(null, this, i), false);
             this.thumbs.appendChild(button);
@@ -558,6 +566,12 @@ for (i = 0; i < Object.keys(aSourceTimeStrings).length; i++) {
 };
 
 vSources = [
+    'tiger',
+    'girl',
+    'vader',
+    'tiger',
+    'girl',
+    'vader',
     'tiger',
     'girl',
     'vader',

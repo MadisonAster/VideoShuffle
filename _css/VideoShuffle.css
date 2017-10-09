@@ -15,80 +15,6 @@
     padding: 0px;
 }
 
-/*
-#VideoShuffleBigButton {
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    margin: -200px 0 0 -150px;
-    width: 100px;
-    height: 100px;
-    cursor: pointer;
-    padding: 100px;
-}*/
-#VideoShuffleFullscreenButton {
-    margin: 0px;
-    height: 100%;
-    width: auto;
-    display: inline-block;
-    cursor: pointer;
-    opacity: 0.6;
-    background-position: center;
-
-    text-align: center;
-    vertical-align: middle;
-    box-sizing: border-box;
-    
-}
-#VideoShuffleFullscreenButton > svg {
-    fill: rgba(200, 200, 200, 0.5);
-    height: 100%;
-    width: auto;
-}
-
-#VideoShuffleMusicButton {
-    margin: 0px;
-    height: 100%;
-    width: auto;
-    display: inline-block;
-    cursor: pointer;
-    opacity: 0.6;
-    background-position: center;
-
-    text-align: center;
-    vertical-align: middle;
-    box-sizing: border-box;
-    
-}
-#VideoShuffleMusicButton > svg {
-    fill: rgba(200, 200, 200, 0.5);
-    height: 100%;
-    width: auto;
-}
-
-
-
-/*
-@media (max-width: 800px) {
-    #VideoShuffleControls {
-        -webkit-transform: scale(0.5);
-        -moz-transform: scale(0.5);
-        transform: scale(0.5);
-        width: 100%;
-    }
-}
-@media (max-width: 400px) {
-    #VideoShuffleControls {
-        -webkit-transform: scale(0.4);
-        -moz-transform: scale(0.4);
-        transform: scale(0.4);
-        width: 100%;
-    }
-}
-*/
-
-
-
 #VideoShuffleMusic {
     z-index: 100;
     position: absolute;
@@ -137,89 +63,100 @@
 }
 
 
-#VideoShuffleBigButton > svg {
-    fill: rgba(200, 200, 200, 0.5);
-    display: none;
-    height: 100%;
-    width: auto;
-}
-#VideoShuffleBigButton.playing > #pause,
-#VideoShuffleBigButton.paused > #play {
-    display: inline;
-}
+
 
 
 #VideoShuffleControls {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    color: #eee;
     background-color: rgba(54,54,54,.85);
     padding: 0px;
+    
     position: absolute;
     bottom: 0;
     left: 0;
     width: 100%;
     height: 10%;
-    box-shadow: 0px 0px 15px rgb(0, 0, 0);
     -webkit-transform-origin: bottom left;
     -moz-transform-origin: bottom left;
     transform-origin: bottom left;
 }
-#VideoShuffleThumbnails,
-#VideoShuffleBigButton {
-    margin: 0px;
+.VideoShuffleControlsButton {
     height: 100%;
     width: auto;
     display: inline-block;
     cursor: pointer;
+}
+.VideoShuffleControlsButton > svg {
+    fill: rgba(200, 200, 200, 0.5);
+    height: 100%;
+    width: auto;
+}
+.ControlsDivider {
+    width: 2px;
+    cursor: auto;
+    padding: 0px 0px;
+    margin: 0px 0px;
     opacity: 0.6;
-    background-position: center;
+    height: 100%;
+    display: inline-block;
+    background-color: rgba(0, 0, 0, 0.3);
+}
 
-    text-align: center;
-    vertical-align: middle;
-    box-sizing: border-box;
+#VideoShuffleBigButton > svg {
+    display: none;
 }
-#VideoShuffleThumbnails {
-    overflow: hidden;
-}
-#VideoShuffleBigButton {
-    padding-left: 10px;
+#VideoShuffleBigButton.playing > #pause,
+#VideoShuffleBigButton.paused > #play {
+    display: inline;
 }
 #VideoShuffleFullscreenButton {
     position: absolute;
     right: 0px;
     top: 0px;
-    padding : 10px;
 }
-#VideoShuffleControls > div,
-#VideoShuffleThumbnails > div {
+
+#VideoShuffleThumbnails {
+    padding: 0% 0;
+    margin: 0;
     display: inline;
+    height: 100%;
+    width: 100%;
+    top: 0px;
+    overflow: scroll;
 }
-#VideoShuffleControls span,
-#VideoShuffleThumbnails span {
-    margin: 0 6px;
-    width: 50px;
+#VideoShuffleThumbnails span{
+    margin: 0 0.25%;
+    width: 8.88888%;
     height: 100%;
     display: inline-block;
     cursor: pointer;
     opacity: 0.6;
     background-position: center;
     background-color: rgba(0, 0, 0, 0.3);
-
-    text-align: center;
-    vertical-align: middle;
-    padding-top: 30px;
-    box-sizing: border-box;
 }
-#VideoShuffleControls span.active,
 #VideoShuffleThumbnails span.active {
     color: #fff;
     background-color: black;
 }
-#VideoShuffleControls > span:hover,
 #VideoShuffleThumbnails > span:hover {
     opacity: 1;
 }
 
+
+
+
+
+
+
+
+#VideoShuffleInfoButton {
+    width: 20px;
+    height: 20px;
+    margin: 10px;
+    float: left;
+    cursor: pointer;
+    
+    fill: rgba(200, 200, 200, 0.5);
+}
 #VideoShuffleInfo {
     z-index: 100;
     position: absolute;
@@ -229,7 +166,6 @@
     border-radius: 5px;
     box-sizing: border-box;
 }
-
 #VideoShuffleInfo.open {
     background-color: rgba(20, 20, 20, 0.5);
 }
@@ -251,14 +187,4 @@
 }
 #VideoShuffleInfo.open > article {
     display: block;
-}
-
-#VideoShuffleInfoButton {
-    width: 20px;
-    height: 20px;
-    margin: 10px;
-    float: left;
-    cursor: pointer;
-    
-    fill: rgba(200, 200, 200, 0.5);
 }

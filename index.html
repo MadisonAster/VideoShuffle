@@ -8,8 +8,7 @@
     <canvas id="VideoShuffleCanvas"></canvas>
     
     <div id="VideoShuffleControls">
-        <div>
-            <div id="VideoShuffleBigButton">
+            <div id="VideoShuffleBigButton" class="VideoShuffleControlsButton">
                 <svg viewBox="0 0 40.007 40.007" id="play">
                     <g>
                         <path d="M37.324,10.004c-5.522-9.566-17.755-12.844-27.32-7.32C0.438,8.206-2.84,20.438,2.684,30.004
@@ -30,9 +29,9 @@
                     </g>
                 </svg>
             </div>
-            <span id="divider" style="width: 2px; cursor: auto"></span>
+            <span class='ControlsDivider'></span>
             
-            <div id="VideoShuffleMusicButton">
+            <div id="VideoShuffleMusicButton" class='VideoShuffleControlsButton'>
                 <svg viewBox="0 0 489.164 489.164">
                     <g>
                         <path d="M159.582,75.459v285.32c-14.274-10.374-32.573-16.616-52.5-16.616c-45.491,0-82.5,32.523-82.5,72.5s37.009,72.5,82.5,72.5
@@ -46,18 +45,16 @@
             <span id="whip" style='display:none;'>Whip Pan</span>
             <span id="channel" style='display:none;'>Channel Change</span>
             
-            <span id="divider" style="width: 2px; cursor: auto"></span>
-            <div id="VideoShuffleThumbnails">
-            </div>
-            <div id="VideoShuffleFullscreenButton">
-                <span id="divider" style="width: 2px; cursor: auto; margin: 0px; position: absolute;left:0px; top:0px;"></span>
+            <span class='ControlsDivider'></span>
+            <div id="VideoShuffleThumbnails"></div>
+            <div id="VideoShuffleFullscreenButton" class='VideoShuffleControlsButton'>
+                <span class='ControlsDivider'></span>
                 <svg viewBox="0 0 24 24">
                     <g>
                         <path d="M24 9h-2v-5h-7v-2h9v7zm-9 13v-2h7v-5h2v7h-9zm-15-7h2v5h7v2h-9v-7zm9-13v2h-7v5h-2v-7h9zm11 4h-16v12h16v-12z"/>
                     </g>
                 </svg>
             </div>
-        </div>
     </div>
     <div id="VideoShuffleInfo">
         <svg version="1.1" id="VideoShuffleInfoButton" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
