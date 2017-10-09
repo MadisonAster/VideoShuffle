@@ -33,11 +33,11 @@
     background-color: rgba(0, 0, 0, 0.3);
 }
 
-#VideoShuffleBigButton > svg {
+#VideoShufflePlayButton > svg {
     display: none;
 }
-#VideoShuffleBigButton.playing > #pause,
-#VideoShuffleBigButton.paused > #play {
+#VideoShufflePlayButton.playing > #pause,
+#VideoShufflePlayButton.paused > #play {
     display: inline;
 }
 #VideoShuffleFullscreenButton {

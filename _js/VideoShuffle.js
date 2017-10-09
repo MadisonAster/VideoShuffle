@@ -14,7 +14,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.controls = document.getElementById('VideoShuffleControls');
     this.thumbs = document.getElementById('VideoShuffleThumbnails');
     this.MusicMenu = document.getElementById('VideoShuffleMusic');
-    this.bigbutton = document.getElementById('VideoShuffleBigButton');
+    this.playbutton = document.getElementById('VideoShufflePlayButton');
     
     ///////////////////////////////////////////////////////
     //Resize Behavior
@@ -47,14 +47,12 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     };
     this.updateButtonState = function() {
         if(this.playing){
-            this.bigbutton.classList.add('playing');
-            this.bigbutton.classList.remove('paused');
+            this.playbutton.classList.add('playing');
+            this.playbutton.classList.remove('paused');
         } else {
-            this.bigbutton.classList.add('paused');
-            this.bigbutton.classList.remove('playing');
-        }
-            
-        //this.bigbutton.className = this.playing ? 'playing' : 'paused';
+            this.playbutton.classList.add('paused');
+            this.playbutton.classList.remove('playing');
+        };
     };
     this.play = function() {
         this.VideoStartTime = Date.now();
@@ -457,7 +455,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         };
     };
     this.canvas.addEventListener('click', this.togglePlay.bind(null, this), false);
-    this.bigbutton.addEventListener('click', this.togglePlay.bind(null, this), false);
+    this.playbutton.addEventListener('click', this.togglePlay.bind(null, this), false);
     window.addEventListener('keyup', this.spacebar.bind(this));
     ///////////////////////////////////////////////////////
     
