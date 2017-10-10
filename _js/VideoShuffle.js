@@ -18,6 +18,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.fullscreenbutton = document.getElementById('VideoShuffleFullscreenButton');
     this.vswrapper = document.getElementById('VideoShuffleWrapper');
     this.volumeslider = document.getElementById('VideoShuffleVolumeSlider');
+    this.volumebutton = document.getElementById('VideoShuffleVolumeButton');
     
     ///////////////////////////////////////////////////////
     //Main Code
@@ -546,10 +547,32 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     
     this.VolumeChange = function(that) {
         volume = that.volumeslider.value/100.0;
+        that.SetVolume(that, volume, false);
+    };
+    this.SetVolume = function(that, volume, setSlider){
         that.audioVolume = volume;
         that.nextAudio.volume = volume;
+        if(setSlider){
+            that.volumeslider.value = volume*100.0;
+        };
+    };
+    this.VolumeClick = function(that) {
+        if(that.volumebutton.className == 'muted'){
+            that.volumebutton.classList.add('low');
+            that.volumebutton.classList.remove('muted');
+            that.SetVolume(that, 0.5, true)
+        } else if (that.volumebutton.className == 'low'){
+            that.volumebutton.classList.add('high');
+            that.volumebutton.classList.remove('low');
+            that.SetVolume(that, 1.0, true);
+        } else if (that.volumebutton.className == 'high'){
+            that.volumebutton.classList.add('muted');
+            that.volumebutton.classList.remove('high');
+            that.SetVolume(that, 0, true);
+        };
     };
     this.volumeslider.addEventListener('input', this.VolumeChange.bind(null, this), false);
+    this.volumebutton.addEventListener('click', this.VolumeClick.bind(null, this), false);
     ///////////////////////////////////////////////////////
     
     console.log(this);
