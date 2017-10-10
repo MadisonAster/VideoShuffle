@@ -18,13 +18,19 @@
     
     outline: 1px solid #111;
     border-top: 1px solid #555;
-    background: rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 1.0);
+    opacity: 0.5;
 }
 .VideoShuffleControlsButton > svg {
-    fill: rgba(200, 200, 200, 0.5);
+    fill: rgba(200, 200, 200, 1.0);
+    opacity: 0.5;
     padding: 20%;
     height: 60%;
     width: auto;
+}
+.VideoShuffleControlsButton > svg:hover,
+.VideoShuffleControlsButton:hover {
+    opacity: 0.8;
 }
 #VideoShufflePlayButton > svg {
     display: none;
@@ -142,12 +148,17 @@
 }
 #VideoShuffleVolumeButton > svg {
     position : absolute;
+    cursor: pointer;
     height: 25px;
     width: 25px;
     bottom: 10px;
     left: 20px;
-    fill: rgba(200, 200, 200, 0.5);
+    fill: rgba(200, 200, 200, 1.0);
+    opacity: 0.5;
     display: none;
+}
+#VideoShuffleVolumeButton > svg:hover {
+    opacity: 0.8;
 }
 #VideoShuffleVolumeButton.high > #vsvolume-high,
 #VideoShuffleVolumeButton.low > #vsvolume-low,
