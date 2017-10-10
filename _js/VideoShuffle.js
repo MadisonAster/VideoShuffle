@@ -83,6 +83,10 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             //no change, nothing to do here
             return;
         };
+        i = random(0, Object.keys(this.transitions).length-1);
+        transitionName = Object.keys(this.transitions)[i];
+        that.transitionClick(that, transitionName);
+        
         if (that.ActiveVideoIndex >= 0) {
             that.transitionStart = Date.now();
             that.previousVideo = that.videos[that.ActiveVideoIndex].element;
@@ -96,6 +100,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         that.nextVideo.pause();
         that.nextVideo.currentTime = 0;
         that.VideoPausePoint = 0;
+        
         if (that.playing) {
             that.VideoStartTime = Date.now();
             that.nextVideo.play();
@@ -142,9 +147,6 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         
         if (that.playing && PlayVideoDelta >= VideoDuration-that.VideoPausePoint){
             console.log(VideoKey+' video ended');
-            i = random(0, Object.keys(this.transitions).length-1);
-            transitionName = Object.keys(this.transitions)[i];
-            that.transitionClick(that, transitionName);
             that.switchVideo(that, (that.ActiveVideoIndex+1) % that.videos.length);
         };
         if (that.playing && PlayAudioDelta >= AudioDuration-that.AudioPausePoint){
