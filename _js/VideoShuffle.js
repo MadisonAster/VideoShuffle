@@ -546,11 +546,10 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     
     this.VolumeChange = function(that) {
         volume = that.volumeslider.value/100.0;
-        console.log(volume);
         that.audioVolume = volume;
         that.nextAudio.volume = volume;
     };
-    this.volumeslider.addEventListener('click', this.VolumeChange.bind(null, this), false);
+    this.volumeslider.addEventListener('input', this.VolumeChange.bind(null, this), false);
     ///////////////////////////////////////////////////////
     
     console.log(this);
