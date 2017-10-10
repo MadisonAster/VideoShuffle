@@ -17,6 +17,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.playbutton = document.getElementById('VideoShufflePlayButton');
     this.fullscreenbutton = document.getElementById('VideoShuffleFullscreenButton');
     this.vswrapper = document.getElementById('VideoShuffleWrapper');
+    this.volumeslider = document.getElementById('VideoShuffleVolumeSlider');
     
     ///////////////////////////////////////////////////////
     //Main Code
@@ -132,6 +133,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         that.nextAudio.pause();
         that.nextAudio.currentTime = 0;
         that.AudioPausePoint = 0;
+        that.nextAudio.volume = this.audioVolume;
         if (that.playing) {
             that.AudioStartTime = Date.now();
             that.nextAudio.play();
@@ -541,6 +543,14 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.musicbutton = document.getElementById('VideoShuffleMusicButton');
     this.music = document.getElementById('VideoShuffleMusic');
     this.musicbutton.addEventListener('click', this.musicClick.bind(null, this), false);
+    
+    this.VolumeChange = function(that) {
+        volume = that.volumeslider.value/100.0;
+        console.log(volume);
+        that.audioVolume = volume;
+        that.nextAudio.volume = volume;
+    };
+    this.volumeslider.addEventListener('click', this.VolumeChange.bind(null, this), false);
     ///////////////////////////////////////////////////////
     
     console.log(this);

@@ -133,6 +133,10 @@
 #VideoShuffleMusic > span:hover {
     opacity: 1;
 }
+#VideoShuffleMusic > input {
+	-webkit-appearance: slider-vertical;
+	writing-mode: bt-lr;
+}
 /*------------------------------------------------*/
 
 /*------------------------------------------------*/
