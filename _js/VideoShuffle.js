@@ -15,9 +15,11 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.thumbs = document.getElementById('VideoShuffleThumbnails');
     this.MusicMenu = document.getElementById('VideoShuffleMusic');
     this.playbutton = document.getElementById('VideoShufflePlayButton');
+    this.fullscreenbutton = document.getElementById('VideoShuffleFullscreenButton');
+    this.vswrapper = document.getElementById('VideoShuffleWrapper');
     
     ///////////////////////////////////////////////////////
-    //Resize Behavior
+    //Main Code
     this.easeInOut = function(t) {
         //Timing function for smoothly animated transitions.
         //Linear timing is too abrupt at edges.
@@ -394,6 +396,25 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     
     ///////////////////////////////////////////////////////
     //Resize Behavior
+    this.goFullScreen = function(that){
+        if ((document.fullScreenElement && document.fullScreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
+            if(that.vswrapper.requestFullScreen){
+                that.vswrapper.requestFullScreen();
+            } else if(vswrapper.webkitRequestFullScreen){
+                that.vswrapper.webkitRequestFullScreen();
+            } else if(that.vswrapper.mozRequestFullScreen){
+                that.vswrapper.mozRequestFullScreen();
+            };
+        } else {
+            if (document.cancelFullScreen) {
+                document.cancelFullScreen();
+            } else if (document.mozCancelFullScreen) {
+                document.mozCancelFullScreen();  
+            } else if (document.webkitCancelFullScreen) {
+                document.webkitCancelFullScreen();  
+            }; 
+        };
+    };
     this.debounce = function(func, wait) {
         //Keeps a function from running too frequently in case it's too slow.
         //We use it for resizing, which takes too long to be run every time
@@ -442,6 +463,8 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     }, 30, true);
     window.addEventListener('orientationchange', this.resize);
     window.addEventListener('resize', this.resize);
+    
+    this.fullscreenbutton.addEventListener('click', this.goFullScreen.bind(null, this), false);
     ///////////////////////////////////////////////////////
     
     
