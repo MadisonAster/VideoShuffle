@@ -88,6 +88,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         that.transitionClick(that, transitionName);
         
         if (that.ActiveVideoIndex >= 0) {
+            that.videos[that.ActiveVideoIndex].button.classList.remove('active');
             that.transitionStart = Date.now();
             that.previousVideo = that.videos[that.ActiveVideoIndex].element;
             that.target.source = that.transition.start(that, that.videos[that.ActiveVideoIndex].reformat, that.videos[index].reformat);
@@ -100,6 +101,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         that.nextVideo.pause();
         that.nextVideo.currentTime = 0;
         that.VideoPausePoint = 0;
+        that.videos[that.ActiveVideoIndex].button.classList.add('active');
         
         if (that.playing) {
             that.VideoStartTime = Date.now();

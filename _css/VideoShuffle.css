@@ -76,6 +76,10 @@
 #VideoShuffleThumbnails span.active {
     color: #fff;
     background-color: black;
+    opacity: 1;
+    
+    outline: 3px solid #FFF;
+    border: 3px solid #000;
 }
 #VideoShuffleThumbnails > span:hover {
     opacity: 1;
