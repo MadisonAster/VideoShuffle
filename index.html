@@ -14,5 +14,39 @@
     <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.blur.js'></script>
     <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.exposure.js'></script>
     <script type='text/javascript' src='./_js/VideoShuffle.js'></script>
+    <script>
+        vSources = [
+            'tiger',
+            'girl',
+            'vader',
+            'tiger',
+            'girl',
+            'vader',
+            'tiger',
+            'girl',
+            'vader',
+            'tiger',
+            'girl',
+        ];
+        aSources = [
+            'tiger',
+            'girl',
+            'vader',
+        ];
+        vSourceDurations = {
+            'danceforme': 115620,
+            'girl':20080,
+            'koch':149620,
+            'olympia':98400,
+            'tiger':8040,
+            'vader':20000,
+        };
+        aSourceDurations = {
+            'girl':184710,
+            'tiger':144090,
+            'vader':255290,
+        };
+        ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations);
+    </script>
 </body>
 </html>

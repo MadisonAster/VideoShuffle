@@ -192,8 +192,6 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             return;
         };
         if (that.ActiveAudioIndex >= 0) {
-            //console.log(that.ActiveAudioIndex);
-            //console.log(that.audios[that.ActiveAudioIndex]);
             that.audios[that.ActiveAudioIndex].button.className = '';
             
             that.previousAudio = that.audios[that.ActiveAudioIndex].element;
@@ -228,11 +226,9 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         AudioDuration = that.audios[that.ActiveAudioIndex].element.aduration;
         
         if (that.playing && PlayVideoDelta >= VideoDuration-that.VideoPausePoint){
-            console.log(VideoKey+' video ended');
             that.switchVideo(that, (that.ActiveVideoIndex+1) % that.videos.length);
         };
         if (that.playing && PlayAudioDelta >= AudioDuration-that.AudioPausePoint){
-            console.log(AudioKey+' audio ended');
             that.switchAudio(that, (that.ActiveAudioIndex+1) % that.audios.length);
         };
         if (that.transitionStart) {
@@ -648,78 +644,4 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.volumeslider.addEventListener('input', this.VolumeChange.bind(null, this), false);
     this.volumebutton.addEventListener('click', this.VolumeClick.bind(null, this), false);
     ///////////////////////////////////////////////////////
-    
-    console.log(this);
 };
-
-function RunShufflePlayer(){
-    function ParseSeconds(timestring){
-        milliseconds = parseInt(timestring.rsplit('.',1)[1])*10;
-        seconds = parseInt(timestring.rsplit('.',1)[0].rsplit(':',1)[1])*1000;
-        minutes = parseInt(timestring.split(':')[1])*60*1000;
-        hours = parseInt(timestring.split(':',1)[0])*60*60*1000;
-        return hours+minutes+seconds+milliseconds;
-    };
-    
-    vSourceTimeStrings = {
-        'tiger': '00:00:08.04',
-        'girl' : '00:00:20.08',
-        'vader' : '00:00:20.00',
-        'koch' : '00:02:29.62',
-        'olympia' : '00:01:38.40',
-        'danceforme' : '00:01:55.62',
-    };
-    aSourceTimeStrings = {
-        'tiger': '00:02:24.09',
-        'girl' : '00:03:04.71',
-        'vader' : '00:04:15.29',
-    };
-    
-    vSourceDurations = {};
-    aSourceDurations = {};
-    for (i = 0; i < Object.keys(vSourceTimeStrings).length; i++) {
-        t = vSourceTimeStrings[Object.keys(vSourceTimeStrings)[i]];
-        milliseconds = ParseSeconds(t);
-        vSourceDurations[Object.keys(vSourceTimeStrings)[i]] = milliseconds;
-    };
-    for (i = 0; i < Object.keys(aSourceTimeStrings).length; i++) {
-        t = aSourceTimeStrings[Object.keys(aSourceTimeStrings)[i]];
-        milliseconds = ParseSeconds(t);
-        aSourceDurations[Object.keys(aSourceTimeStrings)[i]] = milliseconds;
-    };
-    
-    vSources = [
-        'tiger',
-        'girl',
-        'vader',
-        'tiger',
-        'girl',
-        'vader',
-        'tiger',
-        'girl',
-        'vader',
-        'tiger',
-        'girl',
-        'vader',
-        'tiger',
-        'girl',
-        'vader',
-        'tiger',
-        'girl',
-        'vader',
-        'tiger',
-        'girl',
-        'vader',
-    ];
-        aSources = [
-        'tiger',
-        'girl',
-        'vader',
-        'tiger',
-        'girl',
-        'vader',
-    ];
-    var ss = ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations);
-};
-
-RunShufflePlayer();
