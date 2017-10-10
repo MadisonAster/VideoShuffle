@@ -102,6 +102,8 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         that.nextVideo.currentTime = 0;
         that.VideoPausePoint = 0;
         that.videos[that.ActiveVideoIndex].button.classList.add('active');
+        console.log(that.thumbs.scrollLeft);
+        that.thumbs.scrollLeft = that.thumbs.scrollLeft+10;
         
         if (that.playing) {
             that.VideoStartTime = Date.now();
