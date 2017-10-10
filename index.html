@@ -1,88 +1,18 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <link rel="stylesheet" type="text/css" href="./_css/VideoShuffle.css">
+    <link rel='stylesheet' type='text/css' href='./_css/VideoShuffle.css'>
 </head>
 <body style='background: rgb(40,40,40);margin:0px;'>
-    <div id='VideoShuffleWrapper' style='position:absolute;width:100%;height:auto;max-height:100%;top:50%;transform:translate(0%, -50%);'>
-        <canvas id="VideoShuffleCanvas"></canvas>
-        <div id="VideoShuffleControls" class='KeepOpen'>
-            <div id="VideoShufflePlayButton" class="VideoShuffleControlsButton">
-                <svg viewBox="10 10 20.007 20.007" id="play">
-                    <path d="M27.204,19.191l-10.473-6.108c-0.954-0.557-1.724-0.112-1.719,0.992l0.054,12.124
-                    c0.005,1.104,0.784,1.553,1.741,1l10.393-6C28.156,20.647,28.158,19.748,27.204,19.191z"/>
-                </svg>
-                <svg viewBox="10 10 20.007 20.007" id="pause">
-                    <path d="M16.004,14.004c-1.104,0-2,0.895-2,2v7.999c0,1.104,0.896,2,2,2s2-0.896,2-2v-7.999
-                    C18.004,14.898,17.108,14.004,16.004,14.004z M24.004,14.004c-1.104,0-2,0.895-2,2v7.999
-                    c0,1.104,0.896,2.001,2,2.001s2-0.896,2-2.001v-7.999C26.004,14.898,25.108,14.004,24.004,14.004z"/>
-                </svg>
-            </div>
-            <div id="VideoShuffleMusicButton" class='VideoShuffleControlsButton'>
-                <svg viewBox="-30 -30 519.164 519.164">
-                    <path d="M159.582,75.459v285.32c-14.274-10.374-32.573-16.616-52.5-16.616c-45.491,0-82.5,32.523-82.5,72.5s37.009,72.5,82.5,72.5
-                    s82.5-32.523,82.5-72.5V168.942l245-60.615v184.416c-14.274-10.374-32.573-16.616-52.5-16.616c-45.491,0-82.5,32.523-82.5,72.5
-                    s37.009,72.5,82.5,72.5s82.5-32.523,82.5-72.5V0L159.582,75.459z"/>
-                </svg>
-            </div>
-            <div id="VideoShuffleThumbnails"></div>
-            <div id="VideoShuffleFullscreenButton" class='VideoShuffleControlsButton'>
-                <svg viewBox="0 0 24 24">
-                    <path d="M24 9h-2v-5h-7v-2h9v7zm-9 13v-2h7v-5h2v7h-9zm-15-7h2v5h7v2h-9v-7zm9-13v2h-7v5h-2v-7h9zm11 4h-16v12h16v-12z"/>
-                </svg>
-            </div>
-        </div>
-        <div id="VideoShuffleInfo">
-            <svg version="1.1" id="VideoShuffleInfoButton" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-                width="112px" height="112px" viewBox="0 0 112 112" enable-background="new 0 0 112 112" xml:space="preserve">
-                    <path d="M60.361,28.418c-0.563-0.434-1.214-0.742-1.97-0.915c-0.741-0.172-1.544-0.261-2.389-0.261
-                    c-0.851,0-1.652,0.089-2.414,0.261c-0.76,0.173-1.422,0.481-1.987,0.915c-0.56,0.435-1.003,1.012-1.33,1.723
-                    c-0.327,0.714-0.485,1.604-0.485,2.679c0,1.05,0.164,1.932,0.485,2.655c0.327,0.724,0.767,1.312,1.33,1.745
-                    c0.565,0.435,1.228,0.751,1.987,0.934c0.761,0.187,1.563,0.28,2.414,0.28c0.845,0,1.646-0.095,2.389-0.28
-                    c0.756-0.183,1.404-0.504,1.97-0.934c0.56-0.434,1.013-1.018,1.349-1.745c0.336-0.72,0.504-1.605,0.504-2.655
-                    c0-1.073-0.168-1.969-0.504-2.679C61.374,29.43,60.921,28.852,60.361,28.418z"/>
-                    <rect x="50.271" y="42.912" width="11.419" height="41.846"/>
-                    <path d="M56,0C25.074,0,0,25.074,0,56s25.074,56,56,56s56-25.074,56-56S86.926,0,56,0z M56,102.666
-                    C30.227,102.666,9.333,81.773,9.333,56C9.333,30.226,30.227,9.333,56,9.333S102.666,30.226,102.666,56
-                    C102.666,81.773,81.773,102.666,56,102.666z" />
-            </svg>
-            <article>
-                <h2>Video Shuffle</h2>
-                <p>A javascript video player that plays video clips as if they're edited together</p>
-                <p>Code by <a href="http://www.thomas-mcvay.info">Thomas McVay</a> available on <a href="http://github.com/ThomasMcVay/VideoShuffle">GitHub</a>.</p>
-            </article>
-        </div>
-        <div id="VideoShuffleMusic">
-            <input id="VideoShuffleVolumeSlider" type="range" min="0" max="100" value="100" orient="vertical">
-            <div id='VideoShuffleVolumeButton' class='high'>
-                <svg id='vsvolume-mute' viewBox='0 0 461.55 461.55'>
-                    <path d="M345.525,229.5c0-45.9-25.5-84.15-63.75-102v56.1l63.75,63.75C345.525,239.7,345.525,234.6,345.525,229.5z M409.275,229.5
-                    c0,22.95-5.1,45.9-12.75,66.3l38.25,38.25c17.85-30.6,25.5-68.85,25.5-107.1c0-109.65-76.5-201.45-178.5-224.4V56.1
-                    C355.725,81.6,409.275,147.9,409.275,229.5z M34.425,0L1.275,33.15L121.125,153H1.275v153h102l127.5,127.5V262.65L340.425,372.3
-                    c-17.851,12.75-35.7,22.95-58.65,30.601v53.55c35.7-7.65,66.3-22.95,94.35-45.9l51,51l33.15-33.149l-229.5-229.5L34.425,0z
-                    M230.775,25.5l-53.55,53.55l53.55,53.55V25.5z"/>
-                </svg>
-                <svg id='vsvolume-high' viewBox='0 0 459 459'>
-                    <path d="M0,153v153h102l127.5,127.5v-408L102,153H0z M344.25,229.5c0-45.9-25.5-84.15-63.75-102v204
-                    C318.75,313.65,344.25,275.4,344.25,229.5z M280.5,5.1v53.55C354.45,81.6,408,147.899,408,229.5S354.45,377.4,280.5,400.35V453.9
-                    C382.5,430.949,459,339.15,459,229.5C459,119.85,382.5,28.049,280.5,5.1z"/>
-                </svg>
-                <svg id='vsvolume-low' viewBox='0 0 341.333 341.333'>
-                    <polygon points="26.667,106.667 26.667,234.667 112,234.667 218.667,341.333 218.667,0 112,106.667 			"/>
-                    <path d="M261.333,84.8v171.84c31.573-15.787,53.333-48.32,53.333-85.973S292.907,100.48,261.333,84.8z"/>
-                </svg>
-            </div>
-        </div>
-    </div>
-    
-    <script type="text/javascript" src="./_js/MultiUse.js"></script>
-    <script type="text/javascript" src="./_js/Seriously.js/seriously.js"></script>
-    <script type="text/javascript" src="./_js/Seriously.js/effects/seriously.directionblur.js"></script>
-    <script type="text/javascript" src="./_js/Seriously.js/effects/seriously.blend.js"></script>
-    <script type="text/javascript" src="./_js/Seriously.js/effects/seriously.tvglitch.js"></script>
-    <script type="text/javascript" src="./_js/Seriously.js/effects/seriously.linear-transfer.js"></script>
-    <script type="text/javascript" src="./_js/Seriously.js/effects/seriously.blur.js"></script>
-    <script type="text/javascript" src="./_js/Seriously.js/effects/seriously.exposure.js"></script>
-    <script type="text/javascript" src="./_js/VideoShuffle.js"></script>
+    <div id='VideoShuffleWrapper' style='position:absolute;width:100%;height:auto;max-height:100%;top:50%;transform:translate(0%, -50%);'/>
+    <script type='text/javascript' src='./_js/MultiUse.js'></script> 
+    <script type='text/javascript' src='./_js/Seriously.js/seriously.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.directionblur.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.blend.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.tvglitch.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.linear-transfer.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.blur.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.exposure.js'></script>
+    <script type='text/javascript' src='./_js/VideoShuffle.js'></script>
 </body>
 </html>
