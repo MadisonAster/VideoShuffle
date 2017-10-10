@@ -156,12 +156,15 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         };
         this.updateButtonState();
     };
+    this.random = function(min,max) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+    };
     this.switchVideo = function(that, index) {
         if (!that.seriously || that.ActiveVideoIndex === index || index >= that.videos.length) {
             //no change, nothing to do here
             return;
         };
-        i = random(0, Object.keys(this.transitions).length-1);
+        i = this.random(0, Object.keys(this.transitions).length-1);
         transitionName = Object.keys(this.transitions)[i];
         that.transitionClick(that, transitionName);
         
