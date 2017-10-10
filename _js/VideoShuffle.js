@@ -394,6 +394,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.transition = this.transitions[this.activeTransition];
     this.loadVideos();
     this.loadAudios();
+    this.controls.classList.remove('KeepOpen');
     ///////////////////////////////////////////////////////
     
     
@@ -537,8 +538,10 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.musicClick = function(that) {
         if (that.music.className) {
             that.music.className = '';
+            that.controls.classList.remove('KeepOpen');
         } else {
             that.music.className = 'open';
+            that.controls.classList.add('KeepOpen');
         };
     };
     this.musicbutton = document.getElementById('VideoShuffleMusicButton');
