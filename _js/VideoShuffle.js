@@ -102,8 +102,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         that.nextVideo.currentTime = 0;
         that.VideoPausePoint = 0;
         that.videos[that.ActiveVideoIndex].button.classList.add('active');
-        console.log(that.thumbs.scrollLeft);
-        that.thumbs.scrollLeft = that.thumbs.scrollLeft+10;
+        that.thumbs.scrollLeft = (that.ActiveVideoIndex-5)*(that.thumbs.offsetWidth * 0.09388888);
         
         if (that.playing) {
             that.VideoStartTime = Date.now();
@@ -569,9 +568,18 @@ vSources = [
     'tiger',
     'girl',
     'vader',
-    'koch',
-    'olympia',
-    'danceforme',
+    'tiger',
+    'girl',
+    'vader',
+    'tiger',
+    'girl',
+    'vader',
+    'tiger',
+    'girl',
+    'vader',
+    'tiger',
+    'girl',
+    'vader',
 ];
 aSources = [
     'tiger',
