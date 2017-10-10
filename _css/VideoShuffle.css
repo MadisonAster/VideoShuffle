@@ -2,7 +2,8 @@
     overflow: hidden;
 }
 #VideoShuffleCanvas {
-    width: 100%;
+    display: block;
+    margin: auto;
 }
 #VideoShuffleControls {
     background-color: rgba(54,54,54,.85);
