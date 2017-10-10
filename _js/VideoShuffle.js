@@ -617,6 +617,9 @@ aSources = [
     'tiger',
     'girl',
     'vader',
+    'tiger',
+    'girl',
+    'vader',
 ];
 var ss = ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations);
 

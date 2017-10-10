@@ -91,7 +91,7 @@
     z-index: 100;
     position: absolute;
     left: 10px;
-    bottom: 15%;
+    bottom: 12%;
 
     border-radius: 5px;
     box-sizing: border-box;
@@ -100,8 +100,9 @@
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     color: #eee;
     
-    margin: 0 0 0 40px;
+    margin: 0 0 0 0;
     padding: 10px;
+    padding-bottom: 7%;
     width: 350px;
     font-size: 14px;
     text-shadow: 0 1px 0 rgba( 255,255,255,.2 ), 0 -1px 0 rgba( 0,0,0,.2 );
@@ -134,9 +135,13 @@
     opacity: 1;
 }
 #VideoShuffleMusic > input {
-	-webkit-appearance: slider-vertical;
-	writing-mode: bt-lr;
+    position : absolute;
+    width: 75%;
+    height: 12%;
+    bottom: 0;
+    left: 17%;
 }
+
 /*------------------------------------------------*/
 
 /*------------------------------------------------*/
