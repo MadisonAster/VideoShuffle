@@ -1,3 +1,4 @@
+/*------------------------------------------------*/
 #VideoShuffleWrapper {
     overflow: hidden;
 }
@@ -48,8 +49,8 @@
 #VideoShufflePlayButton > svg {
     display: none;
 }
-#VideoShufflePlayButton.playing > #pause,
-#VideoShufflePlayButton.paused > #play {
+#VideoShufflePlayButton.playing > #vspause,
+#VideoShufflePlayButton.paused > #vsplay {
     display: inline;
 }
 #VideoShuffleFullscreenButton {
@@ -57,7 +58,9 @@
     right: 0;
     top: 0;
 }
+/*------------------------------------------------*/
 
+/*------------------------------------------------*/
 #VideoShuffleThumbnails {
     display: inline-block;
     height: 100%;
@@ -178,7 +181,6 @@
 #VideoShuffleVolumeButton.muted > #vsvolume-mute {
     display: inline;
 }
-
 /*------------------------------------------------*/
 
 /*------------------------------------------------*/

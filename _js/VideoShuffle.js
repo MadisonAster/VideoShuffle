@@ -15,11 +15,11 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         <canvas id='VideoShuffleCanvas'></canvas>\
         <div id='VideoShuffleControls' class='KeepOpen'>\
             <div id='VideoShufflePlayButton' class='VideoShuffleControlsButton'>\
-                <svg viewBox='10 10 20.007 20.007' id='play'>\
+                <svg viewBox='10 10 20.007 20.007' id='vsplay'>\
                     <path d='M27.204,19.191l-10.473-6.108c-0.954-0.557-1.724-0.112-1.719,0.992l0.054,12.124\
                     c0.005,1.104,0.784,1.553,1.741,1l10.393-6C28.156,20.647,28.158,19.748,27.204,19.191z'/>\
                 </svg>\
-                <svg viewBox='10 10 20.007 20.007' id='pause'>\
+                <svg viewBox='10 10 20.007 20.007' id='vspause'>\
                     <path d='M16.004,14.004c-1.104,0-2,0.895-2,2v7.999c0,1.104,0.896,2,2,2s2-0.896,2-2v-7.999\
                     C18.004,14.898,17.108,14.004,16.004,14.004z M24.004,14.004c-1.104,0-2,0.895-2,2v7.999\
                     c0,1.104,0.896,2.001,2,2.001s2-0.896,2-2.001v-7.999C26.004,14.898,25.108,14.004,24.004,14.004z'/>\
