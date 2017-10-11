@@ -1,3 +1,8 @@
+String.prototype.rsplit = function(sep, maxsplit) {
+    var split = this.split(sep);
+    return maxsplit ? [ split.slice(0, -maxsplit).join(sep) ].concat(split.slice(-maxsplit)) : split;
+};
+
 function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.videoSources = vSources;
     this.vSourceDurations = vSourceDurations;
@@ -286,7 +291,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             video.index = this.videoSources[i];
             video.vduration = this.vSourceDurations[this.videoSources[i]];
             video.type = 'video/mp4';
-            video.src = 'video/'+this.videoSources[i]+'.mp4';
+            video.src = this.videoSources[i];
             video.crossOrigin = 'anonymous';
             video.preload = 'auto';
             video.id = 'video' + i;
@@ -298,7 +303,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             video.load();
             document.body.appendChild(video);
             
-            button.style.backgroundImage = 'url(images/'+this.videoSources[i]+'.jpg)';
+            button.style.backgroundImage = 'url('+this.videoSources[i].replace('.mp4', '.jpg')+')';
             button.style.backgroundSize = 'cover';
             button.style.backgroundRepeat = 'no-repeat';
             button.addEventListener('click', this.switchVideo.bind(null, this, i), false);
@@ -319,12 +324,12 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
             
             audio.volume = this.audioVolume;
             audio.aduration = this.aSourceDurations[this.audioSources[i]];
-            audio.src = 'audio/'+this.audioSources[i]+'.mp3';
+            audio.src = this.audioSources[i];
             audio.load();
             document.body.appendChild(audio);
             
             button.addEventListener('click', this.switchAudio.bind(null, this, i), false);
-            button.innerHTML = this.audioSources[i];
+            button.innerHTML = this.audioSources[i].rsplit('.',1)[0].rsplit('/',1)[1];
             this.MusicMenu.appendChild(button);
             
             this.audios.push({
