@@ -81,7 +81,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
             </article>\
         </div>\
         <div id='VideoShuffleMusic'>\
-            <input id='VideoShuffleVolumeSlider' type='range' min='0' max='100' value='100' orient='vertical'>\
+            <input id='VideoShuffleVolumeSlider' type='range' min='0' max='100' value='100'>\
             <div id='VideoShuffleVolumeButton' class='high'>\
                 <svg id='vsvolume-mute' viewBox='0 0 461.55 461.55'>\
                     <path d='M345.525,229.5c0-45.9-25.5-84.15-63.75-102v56.1l63.75,63.75C345.525,239.7,345.525,234.6,345.525,229.5z M409.275,229.5\

@@ -110,14 +110,17 @@
     border-top: 1px solid #555;
     background: rgba(0, 0, 0, 0.5);
 }
+#VideoShuffleThumbnails::-moz-scrollbar-track,
 #VideoShuffleThumbnails::-webkit-scrollbar-track {
 	background-color: rgba(0, 0, 0, 0.1);
 }
+#VideoShuffleThumbnails::-moz-scrollbar,
 #VideoShuffleThumbnails::-webkit-scrollbar {
 	width: 6px;
 	height: 4px;
 	background-color: rgba(0, 0, 0, 0.1);
 }
+#VideoShuffleThumbnails::-moz-scrollbar-thumb,
 #VideoShuffleThumbnails::-webkit-scrollbar-thumb {
 	background-color: rgba(255, 255, 255, 0.1);
 }
