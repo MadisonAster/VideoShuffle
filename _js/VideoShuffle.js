@@ -3,13 +3,29 @@ String.prototype.rsplit = function(sep, maxsplit) {
     return maxsplit ? [ split.slice(0, -maxsplit).join(sep) ].concat(split.slice(-maxsplit)) : split;
 };
 
-function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
+function FisherYatesShuffle(array) {
+  var m = array.length, t, i;
+  // While there remain elements to shuffle…
+  while (m) {
+    // Pick a remaining element…
+    i = Math.floor(Math.random() * m--);
+    // And swap it with the current element.
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
+  };
+  return array;
+};
+
+function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, autostart, shufflesources){
     this.videoSources = vSources;
     this.vSourceDurations = vSourceDurations;
     this.audioSources = aSources;
     this.aSourceDurations = aSourceDurations;
     this.videos = [];
     this.audios = [];
+    this.autostart = autostart;
+    this.shufflesources = shufflesources;
 
     this.videoWidth = 1280;
     this.videoHeight = 720;
@@ -19,7 +35,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.vswrapper.innerHTML = "\
         <canvas id='VideoShuffleCanvas'></canvas>\
         <div id='VideoShuffleControls' class='KeepOpen'>\
-            <div id='VideoShufflePlayButton' class='VideoShuffleControlsButton'>\
+            <div id='VideoShufflePlayButton' class='VideoShuffleControlsButton paused'>\
                 <svg viewBox='10 10 20.007 20.007' id='vsplay'>\
                     <path d='M27.204,19.191l-10.473-6.108c-0.954-0.557-1.724-0.112-1.719,0.992l0.054,12.124\
                     c0.005,1.104,0.784,1.553,1.741,1l10.393-6C28.156,20.647,28.158,19.748,27.204,19.191z'/>\
@@ -277,12 +293,17 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
         this.seriously.go(this.draw.bind(null, this));
         this.switchVideo(this, 0);
         this.switchAudio(this, 0);
-        this.play();
+        if (this.autostart) {
+            this.play();
+        };
     };
     this.loadedmeta = function(that) {
         that.start();
     };
     this.loadVideos = function() {
+        if (this.shufflesources) {
+            this.videoSources = FisherYatesShuffle(this.videoSources);
+        };
         for (i = 0; i < this.videoSources.length; i++) {
             var video = document.createElement('video');
             var button = document.createElement('span');
@@ -521,8 +542,13 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations){
     this.resize = this.debounce(function () {
         //var width = Math.min(this.videoWidth, window.innerWidth);
         //var height = Math.min(this.videoHeight, window.innerHeight);
-        var width = window.innerWidth;
-        var height = window.innerHeight;
+        //var width = window.innerWidth;
+        //var height = window.innerHeight;
+        var width = this.vswrapper.offsetWidth;
+        var height = width / (16/9);
+        
+        console.log('width '+width+' height '+height);
+        this.vswrapper.style.height = height;
         if (width/height <= 16/9) {
             height = width / (16/9);
         } else {

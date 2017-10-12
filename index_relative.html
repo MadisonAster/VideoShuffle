@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel='stylesheet' type='text/css' href='./_css/VideoShuffle.css'>
+</head>
+<body style='background: rgb(40,40,40);margin:0px;'>
+    <div id='ContentContainer' style='display:block;position:absolute;top:10%;left:10%;width:80%;padding:0px;margin:0px;'>
+    <div id='ContentDiv' style='display:block;padding:40px;margin:0px;background-color:rgba(0,0,0,0.7);'>
+    
+    <div id='VideoShuffleWrapper' style='width:100%;position:relative;'></div>
+    <script type='text/javascript' src='./_js/Seriously.js/seriously.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.directionblur.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.blend.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.tvglitch.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.linear-transfer.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.blur.js'></script>
+    <script type='text/javascript' src='./_js/Seriously.js/effects/seriously.exposure.js'></script>
+    <script type='text/javascript' src='./_js/VideoShuffle.js'></script>
+    <script>
+        vSources = [
+            './_Assets/VSVideo/tiger.mp4',
+            './_Assets/VSVideo/girl.mp4',
+            './_Assets/VSVideo/vader.mp4',
+            './_Assets/VSVideo/tiger.mp4',
+            './_Assets/VSVideo/girl.mp4',
+            './_Assets/VSVideo/vader.mp4',
+            './_Assets/VSVideo/tiger.mp4',
+            './_Assets/VSVideo/girl.mp4',
+            './_Assets/VSVideo/vader.mp4',
+            './_Assets/VSVideo/tiger.mp4',
+            './_Assets/VSVideo/girl.mp4',
+        ];
+        aSources = [
+            './_Assets/VSAudio/tiger.mp3',
+            './_Assets/VSAudio/girl.mp3',
+            './_Assets/VSAudio/vader.mp3',
+        ];
+        vSourceDurations = {
+            './_Assets/VSVideo/danceforme.mp4': 115620,
+            './_Assets/VSVideo/girl.mp4':20080,
+            './_Assets/VSVideo/koch.mp4':149620,
+            './_Assets/VSVideo/olympia.mp4':98400,
+            './_Assets/VSVideo/tiger.mp4':8040,
+            './_Assets/VSVideo/vader.mp4':20000,
+        };
+        aSourceDurations = {
+            './_Assets/VSAudio/girl.mp3':184710,
+            './_Assets/VSAudio/tiger.mp3':144090,
+            './_Assets/VSAudio/vader.mp3':255290,
+        };
+        ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations);
+    </script>
+    
+    </div>
+    </div>
+</body>
+</html>
