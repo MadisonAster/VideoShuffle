@@ -60,9 +60,11 @@
     bottom: 0%;
 }
 .VideoShuffleControlsButton {
-    height: 100%;
+    height: 50%;
+    top: 50%;
     width: 5.625%;
     display: inline-block;
+    position: absolute;
     cursor: pointer;
     
     outline: 1px solid #111;
@@ -88,20 +90,26 @@
 #VideoShufflePlayButton.paused > #vsplay {
     display: inline;
 }
+#VideoShufflePlayButton {
+    left: 0;
+}
+#VideoShuffleMusicButton {
+    left: 5.625%;
+}
 #VideoShuffleFullscreenButton {
-    position: absolute;
     right: 0;
-    bottom: 0;
-    height: 50%;
 }
 /*------------------------------------------------*/
 
 /*------------------------------------------------*/
 #VideoShuffleThumbnails {
     display: inline-block;
-    height: 100%;
+    position:absolute;
+    height: 50%;
+    top: 50%;
     width: 83.125%;
-    top: 0px;
+    left:11.25%;
+    padding-bottom: 9px;
     overflow-y: hidden;
     overflow-x: scroll;
     white-space: nowrap;
@@ -110,17 +118,13 @@
     border-top: 1px solid #555;
     background: rgba(0, 0, 0, 0.5);
 }
-#VideoShuffleThumbnails::-moz-scrollbar-track,
 #VideoShuffleThumbnails::-webkit-scrollbar-track {
 	background-color: rgba(0, 0, 0, 0.1);
 }
-#VideoShuffleThumbnails::-moz-scrollbar,
 #VideoShuffleThumbnails::-webkit-scrollbar {
 	width: 6px;
-	height: 4px;
 	background-color: rgba(0, 0, 0, 0.1);
 }
-#VideoShuffleThumbnails::-moz-scrollbar-thumb,
 #VideoShuffleThumbnails::-webkit-scrollbar-thumb {
 	background-color: rgba(255, 255, 255, 0.1);
 }
