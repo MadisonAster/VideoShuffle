@@ -540,25 +540,14 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.resize = this.debounce(function () {
-        //var width = Math.min(this.videoWidth, window.innerWidth);
-        //var height = Math.min(this.videoHeight, window.innerHeight);
-        //var width = window.innerWidth;
-        //var height = window.innerHeight;
         var width = this.vswrapper.offsetWidth;
         var height = width / (16/9);
         
-        console.log('width '+width+' height '+height);
         this.vswrapper.style.height = height;
         if (width/height <= 16/9) {
             height = width / (16/9);
         } else {
             width = height * (16/9);
-        };
-        // If it's a big enough screen and we have a retina display, let's take advantage.
-        // We assume that the GPU will be able to handle it
-        if (window.screen.width * window.devicePixelRatio > this.videoWidth) {
-            width *= window.devicePixelRatio;
-            height *= window.devicePixelRatio;
         };
         
         this.canvas.width = width;
