@@ -1,6 +1,6 @@
 # Video Shuffle
 
-This is an automatic video clip player that plays through videos provided to it in an array.
+This is an automatic video clip player that plays through videos provided to it in an array. The main purpose is for demo reels, keep it funky fresh by simply adding new clips to a designated folder.
 
 **[View demo](http://thomas-mcvay.info/DemoReel)**
 

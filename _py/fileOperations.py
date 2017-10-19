@@ -1,10 +1,3 @@
-#===============================================================================
-# @author: Thomas McVay
-# @version: 1.0
-# @lastModified: 140521
-# @description: Generic file operations necessary for copy or creating files/folders
-#===============================================================================
-
 import sys, os, shutil, re
 
 def mirrorFolder(templateFolder, targetFolder):
