@@ -338,6 +338,9 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.loadAudios = function() {
+        if (this.shufflesources) {
+            this.audioSources = FisherYatesShuffle(this.audioSources);
+        };
         this.audioVolume = 1.0;
         for (i = 0; i < this.audioSources.length; i++) {
             var audio = document.createElement('audio');
@@ -541,6 +544,10 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     };
     this.resize = this.debounce(function () {
         var width = this.vswrapper.offsetWidth;
+        console.log('resize fired '+width);
+        if (width == 0) {
+            return;
+        };
         var height = width / (16/9);
         
         this.vswrapper.style.height = height;
@@ -667,4 +674,6 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     this.volumeslider.addEventListener('input', this.VolumeChange.bind(null, this), false);
     this.volumebutton.addEventListener('click', this.VolumeClick.bind(null, this), false);
     ///////////////////////////////////////////////////////
+    
+    return this;
 };
