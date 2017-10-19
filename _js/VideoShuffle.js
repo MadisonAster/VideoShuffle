@@ -136,12 +136,16 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
             };
         };
         for (i = 0; i < this.videos.length; i++) {
+            
             var reformat = this.seriously.transform('reformat');
             reformat.width = this.canvas.width;
             reformat.height = this.canvas.height;
-            reformat.source = this.videos[i].element;
             reformat.mode = 'cover';
+            if (this.videos[i].element.getAttribute('src') == this.videos[i].element.getAttribute('zsrc')) {
+                reformat.source = this.videos[i].element;
+            };
             this.videos[i].reformat = reformat;
+            
         };
     };
     this.updateButtonState = function() {
@@ -199,6 +203,21 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
         
         that.ActiveVideoIndex = index;
+        for (i = 0; i < this.videos.length; i++) {
+            if (i >= that.ActiveVideoIndex-1 && i <= that.ActiveVideoIndex+1 || i == 0 && that.ActiveVideoIndex+1 == that.videos.length) {
+                if(that.videos[i].element.getAttribute('src') == that.videos[i].element.getAttribute('ysrc')){
+                    that.videos[i].element.pause();
+                    that.videos[i].element.setAttribute('src', that.videos[i].element.getAttribute('zsrc'));
+                    that.videos[i].element.load();
+                    that.videos[i].reformat.source = that.videos[i].element;
+                };
+            } else {
+                if(that.videos[i].element.getAttribute('src') == that.videos[i].element.getAttribute('zsrc')){
+                    that.videos[i].element.pause();
+                    that.videos[i].element.setAttribute('src', that.videos[i].element.getAttribute('ysrc'));
+                };
+            };
+        };
         that.nextVideo = that.videos[that.ActiveVideoIndex].element;
         that.nextVideo.pause();
         that.nextVideo.currentTime = 0;
@@ -312,7 +331,15 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
             video.index = this.videoSources[i];
             video.vduration = this.vSourceDurations[this.videoSources[i]];
             video.type = 'video/mp4';
-            video.src = this.videoSources[i];
+            
+            if (i == 0) {
+                video.src = this.videoSources[i];
+            } else {
+                video.src = './_js/PlaceHolderVideo_1920.mp4';
+            };
+            video.setAttribute('ysrc', './_js/PlaceHolderVideo_1920.mp4');
+            video.setAttribute('zsrc', this.videoSources[i]);
+            
             video.crossOrigin = 'anonymous';
             video.preload = 'auto';
             video.id = 'video' + i;
@@ -560,8 +587,10 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         this.canvas.width = width;
         this.canvas.height = height;
         for (i = 0; i < this.videos.length; i++) {
-            this.videos[i].reformat.width = width;
-            this.videos[i].reformat.height = height;
+            if (this.videos[i].reformat != null) {
+                this.videos[i].reformat.width = width;
+                this.videos[i].reformat.height = height;
+            };
         };
     }, 30, true);
     window.addEventListener('orientationchange', this.resize);
