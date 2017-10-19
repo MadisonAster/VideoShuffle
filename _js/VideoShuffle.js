@@ -102,6 +102,15 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
                 </svg>\
             </div>\
         </div>\
+        <div id='VideoShuffleBigButton'>\
+            <svg x='0px' y='0px' width='40.007px' height='40.007px' viewBox='0 0 40.007 40.007' style='enable-background:new 0 0 40.007 40.007;' xml:space='preserve' id='play'>\
+                <path d='M37.324,10.004c-5.522-9.566-17.755-12.844-27.32-7.32C0.438,8.206-2.84,20.438,2.684,30.004\
+                c5.522,9.565,17.754,12.843,27.32,7.32C39.569,31.801,42.848,19.569,37.324,10.004z M28.004,33.859\
+                c-7.652,4.419-17.438,1.797-21.856-5.856c-4.419-7.652-1.796-17.438,5.856-21.855c7.652-4.419,17.438-1.797,21.856,5.856\
+                C38.278,19.656,35.656,29.441,28.004,33.859z M27.204,19.191l-10.473-6.108c-0.954-0.557-1.724-0.112-1.719,0.992l0.054,12.124\
+                c0.005,1.104,0.784,1.553,1.741,1l10.393-6C28.156,20.647,28.158,19.748,27.204,19.191z'/>\
+			</svg>\
+        </div>\
         ";
     
     this.canvas = document.getElementById('VideoShuffleCanvas');
@@ -109,6 +118,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     this.thumbs = document.getElementById('VideoShuffleThumbnails');
     this.MusicMenu = document.getElementById('VideoShuffleMusic');
     this.playbutton = document.getElementById('VideoShufflePlayButton');
+    this.bigbutton = document.getElementById('VideoShuffleBigButton');
     this.fullscreenbutton = document.getElementById('VideoShuffleFullscreenButton');
     this.volumeslider = document.getElementById('VideoShuffleVolumeSlider');
     this.volumebutton = document.getElementById('VideoShuffleVolumeButton');
@@ -610,6 +620,10 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
             that.play();
         };
     };
+    this.BigButtonPlay = function(that) {
+        that.play();
+        that.bigbutton.style.display = 'none';
+    };
     this.spacebar = function(evt) {
         if (evt.which === 32) {
             this.togglePlay(this);
@@ -617,6 +631,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     };
     this.canvas.addEventListener('click', this.togglePlay.bind(null, this), false);
     this.playbutton.addEventListener('click', this.togglePlay.bind(null, this), false);
+    this.bigbutton.addEventListener('click', this.BigButtonPlay.bind(null, this), false);
     window.addEventListener('keyup', this.spacebar.bind(this));
     ///////////////////////////////////////////////////////
     

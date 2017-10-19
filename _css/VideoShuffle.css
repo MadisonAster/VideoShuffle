@@ -271,3 +271,23 @@ p, #VideoShuffleInfo {
     text-align: left;
 }
 /*------------------------------------------------*/
+
+#VideoShuffleBigButton {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 20%;
+    height: 20%;
+    cursor: pointer;
+    padding: 5%;
+}
+#VideoShuffleBigButton > svg {
+    fill: rgba(200, 200, 200, 1.0);
+    opacity: 0.5;
+    width: 100%;
+    height: 100%;
+}
+#VideoShuffleBigButton > svg:hover {
+    opacity: 0.8;
+}
