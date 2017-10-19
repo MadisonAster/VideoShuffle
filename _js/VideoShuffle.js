@@ -17,7 +17,7 @@ function FisherYatesShuffle(array) {
   return array;
 };
 
-function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, autostart, shufflevideosources, shufflaudiosources){
+function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, autostart, shufflevideosources, shuffleaudiosources){
     this.videoSources = vSources;
     this.vSourceDurations = vSourceDurations;
     this.audioSources = aSources;
