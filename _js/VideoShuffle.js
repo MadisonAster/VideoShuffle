@@ -4,6 +4,10 @@ String.prototype.rsplit = function(sep, maxsplit) {
 };
 
 function FisherYatesShuffle(array) {
+    //Takes: array
+    //Performs: copies array and shuffles it using Fisher Yates algorithm
+    //Returns: shuffled copy of array
+    
   var m = array.length, t, i;
   // While there remain elements to shuffle…
   while (m) {
@@ -18,6 +22,10 @@ function FisherYatesShuffle(array) {
 };
 
 function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, autostart, shufflevideosources, shuffleaudiosources){
+    //Takes:
+    //Performs:
+    //Returns:
+    
     this.videoSources = vSources;
     this.vSourceDurations = vSourceDurations;
     this.audioSources = aSources;
@@ -129,14 +137,23 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     ///////////////////////////////////////////////////////
     //Main Code
     this.easeInOut = function(t) {
-        //Timing function for smoothly animated transitions.
-        //Linear timing is too abrupt at edges.
+        //Takes: t as float value,
+        //       should be called during each draw event for the animation,
+        //Performs: Timing function for smoothly animated transitions,
+        //          Linear timing is too abrupt at edges.
+        //Returns: adjusted float value
         if (t < 0.5) {
             return 0.5 * Math.pow(t * 2, 2);
         };
         return -0.5 * (Math.pow(Math.abs(t * 2 - 2), 2) - 2);
     };
     this.initSeriously = function() {
+        //Takes: this.transitions must be defined,
+        //       this.videos must be defined,
+        //       can only be called after metadata for one of the videos has loaded,
+        //Performs: initializes seriously.js,
+        //Returns:
+        
         var key;
         this.seriously = new window.Seriously();
         this.target = this.seriously.target(this.canvas);
@@ -160,6 +177,11 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.updateButtonState = function() {
+        //Takes:
+        //Performs: if playing, changes play button to pause button,
+        //          if not playing, changes pause button to play button,
+        //Returns:
+        
         if(this.playing){
             this.playbutton.classList.add('playing');
             this.playbutton.classList.remove('paused');
@@ -169,6 +191,12 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.play = function() {
+        //Takes:
+        //Performs: sets start time for audio and video
+        //          starts or resumes playback on nextVideo
+        //          calls updateButtonState to change from play button to pause button
+        //Returns:
+        
         this.VideoStartTime = Date.now();
         this.AudioStartTime = Date.now();
         if (this.nextVideo) {
@@ -181,6 +209,12 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         this.updateButtonState();
     };
     this.pause = function() {
+        //Takes:
+        //Performs: sets pause time for audio and video
+        //          pauses all videos and audios (we could be in the middle of a transition, so 2 might be playing at once)
+        //          calls updateButtonState to change from pause button to play button
+        //Returns:
+        
         this.playing = false;
         this.VideoPausePoint = (Date.now()-this.VideoStartTime)+this.VideoPausePoint;
         this.AudioPausePoint = (Date.now()-this.AudioStartTime)+this.AudioPausePoint;
@@ -193,9 +227,21 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         this.updateButtonState();
     };
     this.random = function(min,max) {
+        //Takes: min and max as ints
+        //Performs:
+        //Returns: random int between min and max
         return Math.floor(Math.random() * (max - min + 1)) + min;
     };
     this.switchVideo = function(that, index) {
+        //Takes: this as that, index as int index from this.videos
+        //Performs: changes the active video index,
+        //          swaps ysrc for zsrc on selected index, index+1, and index-1, sets ysrc for all others
+        //          changes the button states,
+        //          sets scroll position for thumbs container,
+        //          resets pause points and start time for video,
+        //          begins playback the selected index if this.playing
+        //Returns:
+        
         if (!that.seriously || that.ActiveVideoIndex === index || index >= that.videos.length) {
             //no change, nothing to do here
             return;
@@ -242,6 +288,13 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.switchAudio = function(that, index) {
+        //Takes: this as that, index as int index from this.audios
+        //Performs: changes the active audio index,
+        //          changes the button states,
+        //          sets audio volume to current volume,
+        //          resets pause points and start time for audio
+        //Returns:
+        
         if (!that.seriously || that.ActiveAudioIndex === index || index >= that.audios.length) {
             return;
         };
@@ -268,9 +321,12 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         
     };
     this.draw = function(that) {
-        //Runs repeatedly as long as the web page is visible, approximately every 16 milliseconds.
-        //Only does work while the transition is running, handles timing of the animation
-        //and volume cross-fade.
+        //Takes:
+        //Performs: Runs repeatedly as long as the web page is visible, approximately every 16 milliseconds.
+        //          calls switchVideo and switchAudio when playtime exceeds duration and pause time.
+        //Returns:
+        
+        //
         PlayVideoDelta = Date.now()-that.VideoStartTime;
         VideoKey = that.videos[that.ActiveVideoIndex].element.key;
         VideoDuration = that.videos[that.ActiveVideoIndex].element.vduration;
@@ -308,6 +364,15 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.start = function() {
+        //Takes: needs to be bound to loadedmetadata event on videos, 
+        //       initSeriously can only be called after metadata for one of the videos has loaded,
+        //Performs: initSeriously,
+        //          resize,
+        //          select video index 0,
+        //          select audio index 0,
+        //          begins playback if autostart is true,
+        //Returns:
+        
         if (this.seriously) {
             return;
         };
@@ -328,9 +393,19 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.loadedmeta = function(that) {
+        //Takes:
+        //Performs: binding function that calls start. binding start directly was causing problems for some reason? Oh well, mysteries of the code.
+        //Returns:
+        
         that.start();
     };
     this.loadVideos = function() {
+        //Takes:
+        //Performs: shuffles this.videoSources if appropriate,
+        //          loads this.videos from this.videoSources,
+        //          creates thumbnail buttons,
+        //Returns:
+        
         if (this.shufflevideosources) {
             this.videoSources = FisherYatesShuffle(this.videoSources);
         };
@@ -376,6 +451,12 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.loadAudios = function() {
+        //Takes:
+        //Performs: shuffles this.audioSources if appropriate,
+        //          loads this.audios from this.audioSources,
+        //          creates audio buttons,
+        //Returns:
+        
         if (this.shuffleaudiosources) {
             this.audioSources = FisherYatesShuffle(this.audioSources);
         };
@@ -541,6 +622,10 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     ///////////////////////////////////////////////////////
     //Resize Behavior
     this.goFullScreen = function(that){
+        //Takes:
+        //Performs: toggles fullscreen via requestFullScreen() and cancelFullScreen()
+        //Returns:
+        
         if ((document.fullScreenElement && document.fullScreenElement !== null) || (!document.mozFullScreen && !document.webkitIsFullScreen)) {
             if(that.vswrapper.requestFullScreen){
                 that.vswrapper.requestFullScreen();
@@ -560,9 +645,11 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.debounce = function(func, wait) {
-        //Keeps a function from running too frequently in case it's too slow.
-        //We use it for resizing, which takes too long to be run every time
-        //the event fires when the user is dragging to resize the window.
+        //Takes: func as callable function argument, wait as int time
+        //Performs: Keeps a function from running too frequently in case it's too slow.
+        //          We use it for resizing, which takes too long to be run every time
+        //          the event fires when the user is dragging to resize the window.
+        //Returns: timeout function
         var timeout;
         var lastRun = 0;
         return function() {
@@ -581,6 +668,10 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.resize = this.debounce(function () {
+        //Takes:
+        //Performs: resizes canvas based on the wrapper width
+        //Returns:
+        
         var width = this.vswrapper.offsetWidth;
         console.log('resize fired '+width);
         if (width == 0) {
@@ -614,24 +705,27 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     ///////////////////////////////////////////////////////
     //PlayButton
     this.togglePlay = function(that) {
+        //Takes:
+        //Performs: toggles playback
+        //Returns:
         if (that.playing) {
             that.pause();
         } else {
             that.play();
         };
-    };
-    this.BigButtonPlay = function(that) {
-        that.play();
         that.bigbutton.style.display = 'none';
     };
     this.spacebar = function(evt) {
+        //Takes: evt as event object
+        //Performs: calls toggle play if spacebar key is detected
+        //Returns:
         if (evt.which === 32) {
             this.togglePlay(this);
         };
     };
     this.canvas.addEventListener('click', this.togglePlay.bind(null, this), false);
     this.playbutton.addEventListener('click', this.togglePlay.bind(null, this), false);
-    this.bigbutton.addEventListener('click', this.BigButtonPlay.bind(null, this), false);
+    this.bigbutton.addEventListener('click', this.togglePlay.bind(null, this), false);
     window.addEventListener('keyup', this.spacebar.bind(this));
     ///////////////////////////////////////////////////////
     
@@ -639,6 +733,9 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     ///////////////////////////////////////////////////////
     //Transition Buttons
     this.transitionClick = function(that, transitionName) {
+        //Takes: that as this, transitionName as str
+        //Performs: changes video transition
+        //Returns:
         that.activeTransition = transitionName;
         that.transition = that.transitions[that.activeTransition];
     };
@@ -648,8 +745,9 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     ///////////////////////////////////////////////////////
     //Sleep Mode
     this.visibilityChange = function(that) {
-        //Pause the video when this browser tab is in the background or minimized.
-        //Resume when it comes back in focus, but only if the user didn't pause manually.
+        //Takes: that as this
+        //Performs: pauses playback if window or tab is set to background
+        //Returns:
         if (that.videos[that.ActiveVideoIndex] != null){
             if (document.hidden || document.mozHidden || document.msHidden || document.webkitHidden) {
                 that.videos[that.ActiveVideoIndex].element.pause();
@@ -668,6 +766,9 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     ///////////////////////////////////////////////////////
     //InfoButton
     this.infoClick = function(that) {
+        //Takes: that as this
+        //Performs: displays info div
+        //Returns:
         if (that.info.className) {
             that.info.className = '';
         } else {
@@ -680,6 +781,9 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     ///////////////////////////////////////////////////////
     //MusicButton
     this.musicClick = function(that) {
+        //Takes: that as this
+        //Performs: displays music menu
+        //Returns:
         if (that.music.className) {
             that.music.className = '';
             that.controls.classList.remove('KeepOpen');
@@ -691,10 +795,19 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
     this.musicbutton.addEventListener('click', this.musicClick.bind(null, this), false);
     
     this.VolumeChange = function(that) {
+        //Takes: that as this
+        //Performs: sets volume based on volume slider
+        //Returns:
+        
         volume = that.volumeslider.value/100.0;
         that.SetVolume(that, volume, false);
     };
     this.SetVolume = function(that, volume, setSlider){
+        //Takes: that as this, volume as float 0.0 to 0.1, setSlider as bool
+        //Performs: sets volume to provided value,
+        //          changes slider postition to match value if setSlider is true
+        //Returns:
+        
         that.audioVolume = volume;
         that.nextAudio.volume = volume;
         if(setSlider){
@@ -702,6 +815,10 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
         };
     };
     this.VolumeClick = function(that) {
+        //Takes: that as this
+        //Performs: toggles volume between 0.0 0.5 and 1.0,
+        //          changes displayed volume svg to match mode
+        //Returns:
         if(that.volumebutton.className == 'muted'){
             that.volumebutton.classList.add('low');
             that.volumebutton.classList.remove('muted');
