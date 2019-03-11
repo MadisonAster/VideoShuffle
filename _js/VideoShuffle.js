@@ -86,7 +86,7 @@ function ShufflePlayer(vSources, aSources, vSourceDurations, aSourceDurations, a
             <article>\
                 <h2>Video Shuffle</h2>\
                 <p>A javascript video player that plays video clips as if they're edited together</p>\
-                <p>Code by <a href='http://www.thomas-mcvay.info'>Thomas McVay</a> available on <a href='http://github.com/ThomasMcVay/VideoShuffle'>GitHub</a>.</p>\
+                <p>Code by <a href='http://www.thomas-mcvay.info'>Madison Aster</a> available on <a href='http://github.com/MadisonAster/VideoShuffle'>GitHub</a>.</p>\
             </article>\
         </div>\
         <div id='VideoShuffleMusic'>\
